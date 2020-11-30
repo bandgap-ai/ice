@@ -82,14 +82,6 @@ public class TypeScriptWriter
 	) {
 		super(TYPESCRIPT_TEMPLATE);
 		Fields fields = data.getFields().getNonDefaultFields();
-		for (Field field : fields) {
-			if (!primitiveMap.containsKey(field.getType())) {
-				throw new UnsupportedOperationException(String.format(
-					"Field %s: type %s is unsupported",
-					field.getName(), field.getType()
-				));
-			}
-		}
 		this.filename = data.getName();
 		this.context.put(NAME, data.getName());
 		this.context.put(FIELDS, fields);
