@@ -5,11 +5,11 @@
 import { DataElement } from "DataElement";
 
 export class $name extends DataElement {
-	#foreach($field in $fields)
-	${field.VarName}?: $primitiveMap["${field.Type}"];
-	#end
+  #foreach($field in $fields)
+  ${field.VarName}#if(!${field.DefaultValue})?#end: $primitiveMap.getOrDefault("${field.Type}", "any")#if(${field.DefaultValue}) = ${field.DefaultValue}#end;
+  #end
 
-	constructor() {
-		super();
-	}
+  constructor() {
+    super();
+  }
 }
