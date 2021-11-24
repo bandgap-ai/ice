@@ -1,0 +1,70 @@
+##
+## Macros and values useful across all templates and other readability helpers.
+##
+
+## Whitespace helpers ##
+
+## Gobbles whitespace
+#macro(noop)#end
+
+## Use as a block macro to set the tab index of all lines in body.
+#macro(settab $num)
+	#set($tab = "	")
+	#if($num == 0)
+		#set($shift = "")
+	#else
+		#set($shift = "#foreach($i in [1..$num])$tab#end")
+	#end
+	#noop$shift$bodyContent.toString().replace("$tab", "").replace("$esc.newline", "$esc.newline$shift").trim()
+#end
+
+## Use as a block macro to remove the first newline in the body.
+## Useful when having foreach and output on the same line is unreadable but
+## output is intended to be all on one line.
+#macro(nonewline)$bodyContent.toString().replaceFirst("\n", "")#end
+
+## Join a list
+#macro(join $sep $list)
+	#foreach($element in $list)#@nonewline
+		#noop$element$sep
+	#end#end
+#end
+
+## Field helpers ##
+
+## Imports
+#macro(imports)
+	#foreach($import in $types.getImports())
+		#@settab(0)
+		import $import;
+		#end
+	#end
+#end
+
+## Get evaluated field type
+#macro(fieldtype)$types.resolve("#evaluate(${field.Type})")#end
+
+## Get the type of this field for use in parameter list (includes nonnull)
+#macro(fieldparametertype)#nonnull("", " ")#fieldtype#end
+
+## Get field declaration
+#macro(fielddecl $mutable)
+	#@settab(1)
+	#if(${field.DefaultValue} && $mutable) @Builder.Default #end#join(" ", ${field.Annotations})#join(" ", ${field.Modifiers})#fieldtype() ${field.VarName}#if(${field.DefaultValue}) = #evaluate(${field.DefaultValue})#end;
+	#end
+#end
+
+## Return @NonNull if field should have it, otherwise return empty string
+#macro(nonnull $before $after)#if(!${field.Nullable} && !${field.Primitive})$!before@NonNull$!after#end#end
+
+## Get field doc comment
+#macro(fielddoc)
+	#set($tab = "	")
+	#if(${field.DocString})
+	#@settab(1)
+	/**
+	 * $field.DocString.trim().replace("$esc.newline", "$esc.newline$tab *")
+	 */
+	#end
+	#end
+#end
