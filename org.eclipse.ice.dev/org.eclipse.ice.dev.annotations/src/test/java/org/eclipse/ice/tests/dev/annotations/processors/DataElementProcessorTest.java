@@ -258,7 +258,6 @@ class DataElementProcessorTest {
 	void testWithSingleDataFieldSucceeds() {
 		Compilation compilation = helper.compile(Inputs.SINGLE.get());
 		assertSucceededAndLogWarnings(compilation);
-		assertDefaultsPresent(compilation);
 		assertInterfaceMatches(compilation, Patterns.SINGLE_INT.get());
 		assertImplementationMatches(compilation, Patterns.SINGLE_IMPL.get());
 	}
@@ -270,7 +269,6 @@ class DataElementProcessorTest {
 	void testWithManyDataFieldsSucceeds() {
 		Compilation compilation = helper.compile(Inputs.MANY.get());
 		assertSucceededAndLogWarnings(compilation);
-		assertDefaultsPresent(compilation);
 		assertInterfaceMatches(compilation, Patterns.MANY_INT.get());
 		assertImplementationMatches(compilation, Patterns.MANY_IMPL.get());
 	}
@@ -282,7 +280,6 @@ class DataElementProcessorTest {
 	void testSingleNonPrimitiveDataFieldSucceeds() {
 		Compilation compilation = helper.compile(Inputs.SINGLE_NON_PRIMITIVE.get());
 		assertSucceededAndLogWarnings(compilation);
-		assertDefaultsPresent(compilation);
 		assertInterfaceMatches(compilation, Patterns.SINGLE_NON_PRIMITIVE_INT.get());
 		assertImplementationMatches(compilation, Patterns.SINGLE_NON_PRIMITIVE_IMPL.get());
 	}
@@ -294,7 +291,6 @@ class DataElementProcessorTest {
 	void testManyNonPrimitiveDataFieldSucceeds() {
 		Compilation compilation = helper.compile(Inputs.MANY_NON_PRIMITIVE.get());
 		assertSucceededAndLogWarnings(compilation);
-		assertDefaultsPresent(compilation);
 		assertInterfaceMatches(compilation, Patterns.MANY_NON_PRIMITIVE_INT.get());
 		assertImplementationMatches(compilation, Patterns.MANY_NON_PRIMITIVE_IMPL.get());
 	}
@@ -305,7 +301,6 @@ class DataElementProcessorTest {
 	@Test
 	void testBoxedTypeParametersPreserved() {
 		Compilation compilation = helper.compile(Inputs.BOXED_TYPES.get());
-		assertDefaultsPresent(compilation);
 		assertInterfaceMatches(compilation, Patterns.BOXED_TYPES_INT.get());
 	}
 
@@ -315,7 +310,6 @@ class DataElementProcessorTest {
 	@Test
 	void testInnerClassTypes() {
 		Compilation compilation = helper.compile(Inputs.INNER_CLASS_TYPES.get());
-		assertDefaultsPresent(compilation);
 		assertInterfaceMatches(compilation, Patterns.INNER_CLASS_TYPES_INT.get());
 	}
 

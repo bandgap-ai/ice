@@ -8,9 +8,8 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.source>1.11</maven.compiler.source>
-		<maven.compiler.target>1.11</maven.compiler.target>
-		<maven.compiler.release>1.11</maven.compiler.release>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
 	</properties>
 
 	<build>
@@ -19,7 +18,6 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.8.1</version>
 				<configuration>
-					<release>11</release>
 					<annotationProcessorPaths>
 						<path>
 							<groupId>com.google.auto.service</groupId>
@@ -29,7 +27,7 @@
 						<path>
 							<groupId>org.projectlombok</groupId>
 							<artifactId>lombok</artifactId>
-							<version>1.18.12</version>
+							<version>1.18.30</version>
 						</path>
 					</annotationProcessorPaths>
 				</configuration>
@@ -37,6 +35,15 @@
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.22.2</version>
+                <configuration>
+                    <forkCount>1</forkCount>
+                    <reuseForks>false</reuseForks>
+                    <argLine>
+						--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED
+						--add-exports=jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED
+						--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED
+                    </argLine>
+                </configuration>
 			</plugin>
 			<plugin>
 				<artifactId>maven-failsafe-plugin</artifactId>
@@ -61,7 +68,7 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.18.12</version>
+			<version>1.18.30</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
@@ -91,7 +98,7 @@
 		<dependency>
 			<groupId>com.google.testing.compile</groupId>
 			<artifactId>compile-testing</artifactId>
-			<version>0.18</version>
+			<version>0.21.0</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>

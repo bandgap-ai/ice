@@ -2,6 +2,9 @@ package org.eclipse.ice.tests.data;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+
 import org.eclipse.ice.data.JavascriptValidator;
 import org.junit.jupiter.api.Test;
 
@@ -27,7 +30,7 @@ class JavascriptValidatorTest {
 		String jsFunction = "var checkData = function (data) {return data == 'Solar Fields';}";
 		validator.setFunction(jsFunction);
 		assertEquals(validator.getFunction(), jsFunction);
-		
+ 		
 		// Check actual validation, which requires executing the Javascript
 		try {
 			assertTrue(validator.validate("Solar Fields"));
