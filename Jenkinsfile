@@ -1,20 +1,18 @@
 pipeline {
     agent any
-
+    tools {
+      maven 'maven-3.9.5'
+    }
     stages {
         stage('Build') {
             steps {
                 echo 'Building..'
-            }
-        }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
+		sh 'mvn clean package'
             }
         }
         stage('Deploy') {
             steps {
-                echo 'Deploying....'
+                echo 'No deployment scheduled.'
             }
         }
     }
