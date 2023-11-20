@@ -1,4 +1,4 @@
-package org.eclipse.ice.dev.jsonschemaconverter;
+package org.eclipse.ice.tests.dev.pojofromjson;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -11,6 +11,8 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+import org.eclipse.ice.dev.pojofromjson.InvalidFileNameException;
+import org.eclipse.ice.dev.pojofromjson.JsonSchemaConverter;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
