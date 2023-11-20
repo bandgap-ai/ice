@@ -1,4 +1,4 @@
-package org.eclipse.ice.dev.jsonschemaconverter;
+package org.eclipse.ice.dev.pojofromjson;
 
 /**
  * Exception to be thrown when an invalid file name cannot be converted to a valid file name

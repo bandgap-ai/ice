@@ -35,6 +35,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 /**
  * Read JSON from Standard In and generate DataElement interface and
  * implementation.
+ * 
  * @author Daniel Bluhm
  */
 public class PojoFromJson {
@@ -53,7 +54,7 @@ public class PojoFromJson {
 	/**
 	 * Directory to output generated files into.
 	 */
-	@Parameter(names = {"-o", "--output"}, description = "Output directory")
+	@Parameter(names = { "-o", "--output" }, description = "Output directory")
 	private String output = ".";
 
 	/**
@@ -63,39 +64,49 @@ public class PojoFromJson {
 	private boolean help;
 
 	/**
-	 * Read from Input and write interface and implementation to files in
-	 * destination.
-	 * @param is InputStream of POJO Outline JSON
+	 * Generate and write JSON from DataElementMetadata
+	 * 
+	 * @param data DataElementMetadata for the new data element
 	 * @param destination directory in which files will be generated
-	 * @throws JsonParseException On failure to parse POJO Outline JSON
+	 * @throws JsonParseException   On failure to parse POJO Outline JSON
 	 * @throws JsonMappingException On failure to map to POJO Outline
-	 * @throws IOException On failure to open file for writing
+	 * @throws IOException          On failure to open file for writing
 	 */
-	public static void handleInputJson(
-		InputStream is, Path destination
-	) throws IOException {
-		// Parse outline from input stream
-		DataElementMetadata data = mapper.readValue(is, DataElementMetadata.class);
+	public static void writeDataElementJson(DataElementMetadata data, Path destination) throws IOException {
 		// Collect fields
 		Fields fields = data.getFields();
 		fields.collect(DefaultFields.get());
 		// Write Interface
-		try (Writer elementInterface = Files.newBufferedWriter(
-			destination.resolve(data.getName() + ".java")
-		)) {
+		try (Writer elementInterface = Files.newBufferedWriter(destination.resolve(data.getName() + ".java"))) {
 			new InterfaceWriter(data).write(elementInterface);
 		}
 
 		// Write implementation
-		try (Writer elementImpl = Files.newBufferedWriter(
-				destination.resolve(data.getImplementationName() + ".java")
-		)) {
+		try (Writer elementImpl = Files
+				.newBufferedWriter(destination.resolve(data.getImplementationName() + ".java"))) {
 			new ImplementationWriter(data).write(elementImpl);
 		}
 	}
 
 	/**
+	 * Read from Input and write interface and implementation to files in
+	 * destination.
+	 * 
+	 * @param is          InputStream of POJO Outline JSON
+	 * @param destination directory in which files will be generated
+	 * @throws JsonParseException   On failure to parse POJO Outline JSON
+	 * @throws JsonMappingException On failure to map to POJO Outline
+	 * @throws IOException          On failure to open file for writing
+	 */
+	public static void handleInputJson(InputStream is, Path destination) throws IOException {
+		// Parse outline from input stream
+		DataElementMetadata data = mapper.readValue(is, DataElementMetadata.class);
+		writeDataElementJson(data,destination);
+	}
+
+	/**
 	 * Execution entry point
+	 * 
 	 * @param args from command line
 	 */
 	public static void main(String[] args) {
@@ -106,12 +117,11 @@ public class PojoFromJson {
 	/**
 	 * Read JSON form Standard In or from arguments and generate DataElement
 	 * interfaces and implementations.
+	 * 
 	 * @param args from command line
 	 */
 	public void run(String... args) {
-		JCommander jcomm = JCommander.newBuilder()
-			.addObject(this)
-			.build();
+		JCommander jcomm = JCommander.newBuilder().addObject(this).build();
 		jcomm.setProgramName("POJOfromJSON");
 		jcomm.parse(args);
 
