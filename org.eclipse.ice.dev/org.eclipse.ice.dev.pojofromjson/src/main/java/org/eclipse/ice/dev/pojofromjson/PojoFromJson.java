@@ -76,6 +76,10 @@ public class PojoFromJson {
 		// Collect fields
 		Fields fields = data.getFields();
 		fields.collect(DefaultFields.get());
+		
+		System.out.println(destination.resolve(data.getName() + ".java"));
+		System.out.println(destination.resolve(data.getImplementationName() + ".java"));
+		
 		// Write Interface
 		try (Writer elementInterface = Files.newBufferedWriter(destination.resolve(data.getName() + ".java"))) {
 			new InterfaceWriter(data).write(elementInterface);

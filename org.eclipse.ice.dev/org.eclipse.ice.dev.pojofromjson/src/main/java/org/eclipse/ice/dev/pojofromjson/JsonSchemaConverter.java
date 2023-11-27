@@ -1,8 +1,10 @@
 package org.eclipse.ice.dev.pojofromjson;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
@@ -111,17 +113,19 @@ public class JsonSchemaConverter {
 			// If no file parameter is passed through command line, read json directly from
 			// System.in
 			if (jsonFiles.isEmpty()) {
-				handleInputJson(System.in, Path.of(output));
+				// FIXME
+				handleInputJson(System.in, Path.of(output), null);
 			}
 			// If file parameter is passed through command line, open file and convert it
 			for (String filePath : jsonFiles) {
 				try (FileInputStream inputJson = new FileInputStream(filePath)) {
-					handleInputJson(inputJson, Path.of(filePath));
+					// FIXME
+					handleInputJson(inputJson, Path.of(filePath), null);
 				}
 			}
 		} catch (Exception ex) {
-			logger.error(ex.getMessage());
-			System.exit(1);
+			logger.error(ex.getMessage(),ex);
+			return;
 		}
 	}
 
@@ -130,29 +134,21 @@ public class JsonSchemaConverter {
 	 * org.eclipse.ice.dev.annotations.
 	 * 
 	 * @param is       InputStream of original JSON schema file
-	 * @param filePath string representing path to input file
+	 * @param outputDirectory Path to the directory where the generated files should be stored
+	 * @param outputPrefix the output file name prefix for generated files
 	 * @throws JsonParseException   On failure to parse the input JSON schema file
 	 * @throws JsonMappingException On failure to map the JSON schema to Map<String,
 	 *                              Object>
 	 * @throws IOException          On failure to write files
 	 */
-	public static void handleInputJson(InputStream is, Path filePath) throws IOException {
+	public static void handleInputJson(InputStream is, Path outputDirectory, String outputPrefix) throws IOException {
 		Map<String, Object> map = mapper.readValue(is, new TypeReference<Map<String, Object>>() {
 		});
 		List<DataElementMetadata> jsonArrayOut = new ArrayList<>();
-		String fileName = "";
-		try {
-			fileName = formatFileName(filePath.getFileName().toString());
-		} catch (Exception ex) {
-			logger.error(ex.getMessage());
-			System.exit(1);
-		}
-		packageName = packageName.equals("") ? fileName.toLowerCase() : packageName;
-		// Process the nested json nodes
+		packageName = packageName.equals("") ? outputPrefix.toLowerCase() : packageName;
+		// Process the nested json nodes - ignore definitions section
 		List<DataElementMetadata> outlines = map.entrySet().stream()
-				.filter(e -> e.getValue() instanceof Map && !e.getKey().equals("definitions")).map(entry -> { // ignore
-																												// definitions
-																												// section
+				.filter(e -> e.getValue() instanceof Map && !e.getKey().equals("definitions")).map(entry -> {
 					return processJsonNodes(entry);
 				}).collect(Collectors.toList());
 		jsonArrayOut.addAll(outlines);
@@ -166,16 +162,15 @@ public class JsonSchemaConverter {
 		}).collect(Collectors.toList());
 		// Create the data element metadata using the extracted field data above.
 		// This is not aligned with the newer way introduced by D. Bluhm. The
-		// need to call 'new Fields(fields)' is bothersome, and not the less so
+		// need to call 'new Fields(fields)' is bothersome, and more so
 		// because of the use of the absurd stream logic above to create the list.
-		// However, I digress and I'll fix that later. ~JJB
-		DataElementMetadata po = DataElementMetadata.builder().packageName(packageName).name(fileName + "Fields")
+		// However, I digress and I'll fix that later. ~JJB // FIXME
+		DataElementMetadata po = DataElementMetadata.builder().packageName(packageName).name(outputPrefix + "Fields")
 				.fields(new Fields(fields)).build();
 		jsonArrayOut.add(po);
-
-		writeJson(jsonArrayOut, filePath, fileName);
+		writeJson(jsonArrayOut, outputDirectory, outputPrefix); // FIXME
 		if (useWriteFile) {
-			writeDataElements(jsonArrayOut, filePath);
+			writeDataElements(jsonArrayOut, outputDirectory); // FIXME
 		}
 	}
 
@@ -271,13 +266,15 @@ public class JsonSchemaConverter {
 	 * to output destination.
 	 * 
 	 * @param json converted JSON file represented as a list of PojoOultine
-	 * @param file the name of the new JSON file
+	 * @param outputDir the output directory
+	 * @param outputPrefix the prefix for output files
 	 */
-	public static void writeJson(List<DataElementMetadata> json, Path filePath, String file) {
+	public static void writeJson(List<DataElementMetadata> json, Path outputDir, String outputPrefix) {
 		try {
-			mapper.writeValue(filePath.resolve(filePath.getParent() + "/" + file + "_" + "result.json").toFile(), json);
+			Path outputFilePath = outputDir.resolve(outputPrefix + "_" + "result.json");
+			mapper.writeValue(outputFilePath.toFile(), json);
 		} catch (Exception e) {
-			logger.error(e.getMessage());
+			logger.error(e.getMessage(),e);
 		}
 	}
 
@@ -285,15 +282,16 @@ public class JsonSchemaConverter {
 	 * Uses PojoFromJson to write java files based on input JSON representation.
 	 * 
 	 * @param json list of DataElementMetadatas to be written as java objects
+	 * @param outputDir output directory where the data elements will be generated
 	 */
-	public static void writeDataElements(List<DataElementMetadata> json, Path filePath) {
+	public static void writeDataElements(List<DataElementMetadata> json, Path outputDir) {
 		for (DataElementMetadata j : json) {
 			try {
 				for (DataElementMetadata data : json) {
-					PojoFromJson.writeDataElementJson(data,filePath);
+					PojoFromJson.writeDataElementJson(data,outputDir);
 				}
 			} catch (Exception e) {
-				logger.error(e.getMessage());
+				logger.error(e.getMessage(),e);
 			}
 		}
 	}
