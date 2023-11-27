@@ -53,8 +53,14 @@ public class JsonSchemaConverter {
 	/**
 	 * Directory to output generated files into.
 	 */
-	@Parameter(names = { "-o", "--output" }, description = "Output directory")
-	private static String output = ".";
+	@Parameter(names = { "-o", "--outputDir" }, description = "Output directory")
+	private static String outputDirArg = ".";
+
+	/**
+	 * Filename prefix for generated files, i.e. 'TestJson' for 'TestJson.java'.
+	 */
+	@Parameter(names = { "-o", "--outputPrefix" }, description = "Output filename prefix")
+	private static String outputPrefixArg = ".";
 
 	/**
 	 * Package name of generated java files.
@@ -106,25 +112,31 @@ public class JsonSchemaConverter {
 	 * @param args command line arguments
 	 */
 	public void run(String... args) {
+
+		// Get the command line arguments.
 		JCommander jcomm = JCommander.newBuilder().addObject(this).build();
 		jcomm.setProgramName("JsonSchemaConverter");
 		jcomm.parse(args);
+		Path outputDirPath = Path.of(outputDirArg);
+
+		// Try to generate the code.
 		try {
 			// If no file parameter is passed through command line, read json directly from
 			// System.in
 			if (jsonFiles.isEmpty()) {
-				// FIXME
-				handleInputJson(System.in, Path.of(output), null);
-			}
-			// If file parameter is passed through command line, open file and convert it
-			for (String filePath : jsonFiles) {
-				try (FileInputStream inputJson = new FileInputStream(filePath)) {
-					// FIXME
-					handleInputJson(inputJson, Path.of(filePath), null);
+				System.out.println("Reading from CLI input. Press Ctrl+C to exit.");
+				handleInputJson(System.in, outputDirPath, outputPrefixArg);
+			} else {
+				// If file parameter is passed through command line, open file and convert it
+				for (String filePath : jsonFiles) {
+					try (FileInputStream inputJson = new FileInputStream(filePath)) {
+						handleInputJson(inputJson, Path.of(outputDirArg), outputPrefixArg);
+					}
 				}
 			}
 		} catch (Exception ex) {
-			logger.error(ex.getMessage(),ex);
+			// Fail fast otherwise
+			logger.error(ex.getMessage(), ex);
 			return;
 		}
 	}
@@ -133,9 +145,10 @@ public class JsonSchemaConverter {
 	 * Converts given JSON schema file into a JSON format. accepted by
 	 * org.eclipse.ice.dev.annotations.
 	 * 
-	 * @param is       InputStream of original JSON schema file
-	 * @param outputDirectory Path to the directory where the generated files should be stored
-	 * @param outputPrefix the output file name prefix for generated files
+	 * @param is              InputStream of original JSON schema file
+	 * @param outputDirectory Path to the directory where the generated files should
+	 *                        be stored
+	 * @param outputPrefix    the output file name prefix for generated files
 	 * @throws JsonParseException   On failure to parse the input JSON schema file
 	 * @throws JsonMappingException On failure to map the JSON schema to Map<String,
 	 *                              Object>
@@ -168,9 +181,9 @@ public class JsonSchemaConverter {
 		DataElementMetadata po = DataElementMetadata.builder().packageName(packageName).name(outputPrefix + "Fields")
 				.fields(new Fields(fields)).build();
 		jsonArrayOut.add(po);
-		writeJson(jsonArrayOut, outputDirectory, outputPrefix); // FIXME
+		writeJson(jsonArrayOut, outputDirectory, outputPrefix);
 		if (useWriteFile) {
-			writeDataElements(jsonArrayOut, outputDirectory); // FIXME
+			writeDataElements(jsonArrayOut, outputDirectory);
 		}
 	}
 
@@ -207,66 +220,61 @@ public class JsonSchemaConverter {
 	}
 
 	/**
-    * Helper function to recursively obtain all of the fields from a map.
-    * @param map map to get data fields from
-    * @param key the name of key used to access this map from its parent map
-    * @return list of Fields representing the data from the input map
-    */
-   public static List<Field> processJsonHelper(Map<String, Object> map, String key) {
-	   List<Field> fields = new ArrayList<>();
-	   String basicDocString = "Generated data element field.";
-	   if (map.keySet().contains(DEFAULT_FIELD)) {
-		   // In lieu of using no documentation, write something basic.
-		   String fieldDocs = (map.get(DESCRIPTION_FIELD) == basicDocString) ? String.valueOf(map.get("$ref"))
-				   : String.valueOf(map.get(DESCRIPTION_FIELD));
-		   // Figure out the default type and value based on whether or not we
-		   // are working a collection. TBD - These should be in functions.
-		   String defaultValue = (map.get(DEFAULT_FIELD) instanceof ArrayList) ? defaultValue = formatListAsString((ArrayList) map.get(DEFAULT_FIELD)) 
-				   : String.valueOf(map.get(DEFAULT_FIELD));;
-		   String type = (map.get(DEFAULT_FIELD) instanceof ArrayList) ? getTypeAsString(String.valueOf(((ArrayList) map.get(DEFAULT_FIELD)).get(0))) + "[]"  
-				   :getTypeAsString(String.valueOf(map.get(DEFAULT_FIELD)));
-		   // Generate the field
-		   Field field = Field.builder()
-						.name(getValidVariableName(key))
-						.docString(fieldDocs)
-						.defaultValue(defaultValue)
-						.type(type)
-						.build();
+	 * Helper function to recursively obtain all of the fields from a map.
+	 * 
+	 * @param map map to get data fields from
+	 * @param key the name of key used to access this map from its parent map
+	 * @return list of Fields representing the data from the input map
+	 */
+	public static List<Field> processJsonHelper(Map<String, Object> map, String key) {
+		List<Field> fields = new ArrayList<>();
+		String basicDocString = "Generated data element field.";
+		if (map.keySet().contains(DEFAULT_FIELD)) {
+			// In lieu of using no documentation, write something basic.
+			String fieldDocs = (map.get(DESCRIPTION_FIELD) == basicDocString) ? String.valueOf(map.get("$ref"))
+					: String.valueOf(map.get(DESCRIPTION_FIELD));
+			// Figure out the default type and value based on whether or not we
+			// are working a collection. TBD - These should be in functions.
+			String defaultValue = (map.get(DEFAULT_FIELD) instanceof ArrayList)
+					? defaultValue = formatListAsString((ArrayList) map.get(DEFAULT_FIELD))
+					: String.valueOf(map.get(DEFAULT_FIELD));
+			;
+			String type = (map.get(DEFAULT_FIELD) instanceof ArrayList)
+					? getTypeAsString(String.valueOf(((ArrayList) map.get(DEFAULT_FIELD)).get(0))) + "[]"
+					: getTypeAsString(String.valueOf(map.get(DEFAULT_FIELD)));
+			// Generate the field
+			Field field = Field.builder().name(getValidVariableName(key)).docString(fieldDocs)
+					.defaultValue(defaultValue).type(type).build();
 
-		   fields.add(field);
-		   return fields;
-	   }
-	   
-	   map.entrySet().stream().forEach(e -> {
-		   
-		   if (e.getValue() instanceof Map) {
-			   fields.addAll(processJsonHelper((Map<String, Object>)e.getValue(), e.getKey()));		
-		   } else if (!(e.getValue() instanceof ArrayList)) {
-			   Field n = Field.builder()
- 						.name(getValidVariableName(key))
- 						.type(TYPE_FIELD)
- 						.docString(String.valueOf(e.getValue()))
- 						.build();
-			   fields.add(n);
-		   } else {
-			   Field n = Field.builder()
-  						.name(getValidVariableName(e.getKey()))
-  						.defaultValue(String.valueOf(e.getValue()))
-  					     .type(getTypeAsString(String.valueOf(e.getValue())))
-  						.build();
-			   fields.add(n);
-		   }
-		   
-	   });
-	   return fields;
-   }
+			fields.add(field);
+			return fields;
+		}
+
+		map.entrySet().stream().forEach(e -> {
+
+			if (e.getValue() instanceof Map) {
+				fields.addAll(processJsonHelper((Map<String, Object>) e.getValue(), e.getKey()));
+			} else if (!(e.getValue() instanceof ArrayList)) {
+				Field n = Field.builder().name(getValidVariableName(key)).type(TYPE_FIELD)
+						.docString(String.valueOf(e.getValue())).build();
+				fields.add(n);
+			} else {
+				Field n = Field.builder().name(getValidVariableName(e.getKey()))
+						.defaultValue(String.valueOf(e.getValue())).type(getTypeAsString(String.valueOf(e.getValue())))
+						.build();
+				fields.add(n);
+			}
+
+		});
+		return fields;
+	}
 
 	/**
 	 * Write the converted JSON file, represented as a list of DataElementMetadata
 	 * to output destination.
 	 * 
-	 * @param json converted JSON file represented as a list of PojoOultine
-	 * @param outputDir the output directory
+	 * @param json         converted JSON file represented as a list of PojoOultine
+	 * @param outputDir    the output directory
 	 * @param outputPrefix the prefix for output files
 	 */
 	public static void writeJson(List<DataElementMetadata> json, Path outputDir, String outputPrefix) {
@@ -274,24 +282,24 @@ public class JsonSchemaConverter {
 			Path outputFilePath = outputDir.resolve(outputPrefix + "_" + "result.json");
 			mapper.writeValue(outputFilePath.toFile(), json);
 		} catch (Exception e) {
-			logger.error(e.getMessage(),e);
+			logger.error(e.getMessage(), e);
 		}
 	}
 
 	/**
 	 * Uses PojoFromJson to write java files based on input JSON representation.
 	 * 
-	 * @param json list of DataElementMetadatas to be written as java objects
+	 * @param json      list of DataElementMetadatas to be written as java objects
 	 * @param outputDir output directory where the data elements will be generated
 	 */
 	public static void writeDataElements(List<DataElementMetadata> json, Path outputDir) {
 		for (DataElementMetadata j : json) {
 			try {
 				for (DataElementMetadata data : json) {
-					PojoFromJson.writeDataElementJson(data,outputDir);
+					PojoFromJson.writeDataElementJson(data, outputDir);
 				}
 			} catch (Exception e) {
-				logger.error(e.getMessage(),e);
+				logger.error(e.getMessage(), e);
 			}
 		}
 	}
