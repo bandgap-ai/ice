@@ -53,13 +53,13 @@ public class JsonSchemaConverter {
 	/**
 	 * Directory to output generated files into.
 	 */
-	@Parameter(names = { "-o", "--outputDir" }, description = "Output directory")
+	@Parameter(names = { "-d", "--outputDir" }, description = "Output directory")
 	private static String outputDirArg = ".";
 
 	/**
 	 * Filename prefix for generated files, i.e. 'TestJson' for 'TestJson.java'.
 	 */
-	@Parameter(names = { "-o", "--outputPrefix" }, description = "Output filename prefix")
+	@Parameter(names = { "-n", "--outputPrefix" }, description = "Output name prefix")
 	private static String outputPrefixArg = ".";
 
 	/**
