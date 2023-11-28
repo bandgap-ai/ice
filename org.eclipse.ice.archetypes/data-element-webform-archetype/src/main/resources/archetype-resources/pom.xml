@@ -11,7 +11,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<vaadin.version>14.1.17</vaadin.version>
+		<vaadin.version>24.2.4</vaadin.version>
 		<failOnMissingWebXml>false</failOnMissingWebXml>
 	</properties>
 	
@@ -69,10 +69,14 @@
 			<version>3.0.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-			<version>3.1.0</version>
-			<scope>provided</scope>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>2.16.0</version>
+		</dependency>
+		<dependency>
+    		<groupId>jakarta.servlet</groupId>
+    		<artifactId>jakarta.servlet-api</artifactId>
+    		<version>6.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
@@ -158,7 +162,7 @@
 				<plugin>
 					<groupId>org.eclipse.jetty</groupId>
 					<artifactId>jetty-maven-plugin</artifactId>
-					<version>9.4.15.v20190215</version>
+					<version>11.0.18</version>
 					<configuration>
 						<scanIntervalSeconds>1</scanIntervalSeconds>
 					</configuration>
@@ -176,7 +180,7 @@
 					<artifactId>maven-compiler-plugin</artifactId>
 					<version>3.8.0</version>
 					<configuration>
-						<release>11</release>
+						<release>17</release>
 						<annotationProcessorPaths>
 							<path>
 								<groupId>com.google.dagger</groupId>
