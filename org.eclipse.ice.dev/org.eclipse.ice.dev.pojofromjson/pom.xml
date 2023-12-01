@@ -20,7 +20,7 @@
 					<archive>
 						<manifest>
 							<mainClass>
-								org.eclipse.ice.dev.pojofromjson.JsonSchemaConverter
+								org.eclipse.ice.dev.pojofromjson.PojoFromJson
 							</mainClass>
 						</manifest>
 					</archive>

@@ -158,7 +158,7 @@ public class JsonSchemaConverter {
 		Map<String, Object> map = mapper.readValue(is, new TypeReference<Map<String, Object>>() {
 		});
 		List<DataElementMetadata> jsonArrayOut = new ArrayList<>();
-		packageName = packageName.equals("") ? outputPrefix.toLowerCase() : packageName;
+		packageName = packageName.isEmpty() ? outputPrefix.toLowerCase() : packageName;
 		// Process the nested json nodes - ignore definitions section
 		List<DataElementMetadata> outlines = map.entrySet().stream()
 				.filter(e -> e.getValue() instanceof Map && !e.getKey().equals("definitions")).map(entry -> {

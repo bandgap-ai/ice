@@ -1,4 +1,5 @@
-import {css, customElement, html, LitElement, property, TemplateResult} from 'lit-element';
+import {css, html, LitElement, TemplateResult} from 'lit';
+import {customElement, property} from 'lit/decorators.js';
 import '@vaadin/vaadin-text-field';
 import '@vaadin/vaadin-checkbox';
 import { Person } from './Person';

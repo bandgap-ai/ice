@@ -13,7 +13,7 @@ package gov.ornl.rse.renderer.client.test;
 
 import java.util.function.BiConsumer;
 
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 
 import org.eclipse.ice.renderer.Renderer;
 import org.eclipse.ice.renderer.Person;

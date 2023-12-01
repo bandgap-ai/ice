@@ -43,6 +43,6 @@ public class PersonSpec {
 	 * to be added and the first time the enumeration is used the build needs
 	 * to be run.
 	 */
-	@DataField.Default(value="org.eclipse.ice.renderer.PersonEnum.TALL");
+	@DataField.Default(value="org.eclipse.ice.renderer.PersonEnum.TALL")
 	@DataField public PersonEnum height;
 }
