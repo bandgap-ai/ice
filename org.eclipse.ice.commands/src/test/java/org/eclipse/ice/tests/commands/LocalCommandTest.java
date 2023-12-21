@@ -144,6 +144,7 @@ public class LocalCommandTest {
 		commandConfig.setCommandId(1);
 		commandConfig.setExecutable("./test_code_execution.sh");
 		// Check if the OS is windows, and thus adjust the executable if so
+		// FIXME! - Seems like the command should handle this on its own?
 		if (os.toLowerCase().contains("win")) {
 			// Two slashes so that java doesn't read it as a tab "\t"
 			executable = ".\\test_code_execution.ps1";
