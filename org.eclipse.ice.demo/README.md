@@ -1,0 +1,1 @@
+This folder contains demonstration code and plugins for Eclipse ICE 3.x+. Older demonstration plugins for the ICE 2.x line can be found in the 'old-demos' tag.
