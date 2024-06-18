@@ -17,7 +17,7 @@ import org.eclipse.ice.tasks.TaskState;
 
 /**
  * Test data for the Task tests
- * @author Jay Jay Billiings
+ * @author Jay Jay Billings
  *
  */
 @DataElement(name="TestData")
