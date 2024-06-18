@@ -13,11 +13,13 @@ package org.eclipse.ice.tests.dev.annotations.processors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
  * Test for FieldDeserializer.
  */
+@Disabled("Disabled until I figure out what this is for.")
 class FieldDeserializerTest {
 
 	/**

@@ -2,12 +2,19 @@
 
 Please see [the website](https://www.eclipse.org/ice) for more information on the project.
 
+## Notes on using Eclipse for ICE Development
+
+The Maven build is the preferred build for ICE. Eclipse will often report errors that don't exist in the Maven build, and it may be necessary to run `Project->Clean...` or other tasks to get Eclipse to stop reporting ghost errors.
+
 ## Build Instructions
 
 Checkout the project and execute
+
 ```bash
 mvn clean install
 ```
+
+Always run the `clean` target.
 
 ### Building BATS
 
