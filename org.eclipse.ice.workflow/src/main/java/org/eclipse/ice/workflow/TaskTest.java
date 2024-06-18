@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.EnumSet;
 
+import org.eclipse.ice.commands.ConnectionAuthorizationHandlerFactory;
+import org.eclipse.ice.commands.ConnectionConfiguration;
 import org.eclipse.ice.commands.FileHandlerFactory;
 import org.eclipse.ice.commands.IFileHandler;
 import org.springframework.statemachine.StateContext;
@@ -56,7 +58,10 @@ public class TaskTest {
 		String homePath = home + separator;
 
 		FileHandlerFactory factory = new FileHandlerFactory();
-		IFileHandler fileHandler = factory.getFileHandler();
+		ConnectionAuthorizationHandlerFactory authFactory = new ConnectionAuthorizationHandlerFactory();
+		ConnectionConfiguration connCfg = new ConnectionConfiguration();
+		connCfg.setAuthorization(authFactory.getConnectionAuthorizationHandler("local"));
+		IFileHandler fileHandler = factory.getFileHandler(connCfg);
 		fileHandler.move(homePath + filePath, homePath + newFilePath);
 		return;
 	}
