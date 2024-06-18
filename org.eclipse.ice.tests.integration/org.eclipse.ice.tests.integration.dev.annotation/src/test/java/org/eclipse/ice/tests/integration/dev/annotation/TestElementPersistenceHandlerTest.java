@@ -18,6 +18,7 @@ import java.util.Iterator;
 import org.bson.Document;
 import org.eclipse.ice.tests.util.data.TestConfig;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,6 +31,7 @@ import com.mongodb.client.MongoDatabase;
  * Test Generated Persistence Handler works as intended against MongoDB.
  * @author Daniel Bluhm
  */
+@Disabled("Disabled until mongo.properties is rebuilt.")
 class TestElementPersistenceHandlerTest {
 	/**
 	 * Logger.
