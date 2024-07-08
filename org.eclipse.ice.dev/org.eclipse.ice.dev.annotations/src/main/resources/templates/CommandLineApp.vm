@@ -1,0 +1,20 @@
+package $package;
+
+import ${package}.${class};
+
+/**
+ * Command line application to run ${class} ${method}
+ */
+public final class ${class}App {
+
+	/**
+	 * Simple main printing some details about various simple graphs.
+	 */
+	public static void main(String[] args) {
+		System.out.println("Executing app.");
+		${class} appClass = new ${class}();
+		appClass.${method}();
+		
+		return;
+	}
+}

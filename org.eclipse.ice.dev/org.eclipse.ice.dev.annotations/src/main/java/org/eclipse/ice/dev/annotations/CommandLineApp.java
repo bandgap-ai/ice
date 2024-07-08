@@ -18,12 +18,18 @@ import java.lang.annotation.Target;
 
 /**
  * This is an annotation to create a basic application that is executable on
- * the command line.
+ * the command line. This annotation must be used on public methods.
  * 
  * This annotation will not update the build system to automatically package
  * the new application.
+ * 
+ * Unlike other ICE annotations, CommandLineApp will only produce an
+ * implementation, not and interface and an implementation. An interface is
+ * not needed since main() is implemented as a function in its own class.
+ * 
+ * @author Jay Jay Billings
  */
-@Target(ElementType.TYPE)
+@Target(ElementType.METHOD)
 @Retention(RetentionPolicy.SOURCE)
 public @interface CommandLineApp {
 

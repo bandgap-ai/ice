@@ -24,7 +24,7 @@ import javax.annotation.processing.Filer;
  */
 public class ImplementationWriter
 	extends VelocitySourceWriter
-	implements GeneratedFileWriter
+		implements GeneratedFileWriter
 {
 
 	/**
@@ -60,7 +60,7 @@ public class ImplementationWriter
 	/**
 	 * Fully qualified name of class to be generated.
 	 */
-	private String fqn;
+	private String fullyQualifiedName;
 
 		/**
 	 * Constructor
@@ -73,7 +73,7 @@ public class ImplementationWriter
 	 */
 	public ImplementationWriter(DataElementMetadata data) {
 		super(IMPL_TEMPLATE);
-		this.fqn = data.getFullyQualifiedImplName();
+		this.fullyQualifiedName = data.getFullyQualifiedImplName();
 		this.context.put(PACKAGE, data.getPackageName());
 		this.context.put(INTERFACE, data.getName());
 		this.context.put(CLASS, data.getImplementationName());
@@ -83,6 +83,6 @@ public class ImplementationWriter
 
 	@Override
 	public Writer openWriter(Filer filer) throws IOException {
-		return filer.createSourceFile(fqn).openWriter();
+		return filer.createSourceFile(fullyQualifiedName).openWriter();
 	}
 }
