@@ -9,7 +9,7 @@
  *   Initial API and implementation and/or initial documentation - 
  *   Jay Jay Billings
  *****************************************************************************/
-package org.eclipse.ice.tests.workflow;
+package org.eclipse.ice.tests.workflows;
 
 import org.jgrapht.*;
 import org.jgrapht.alg.cycle.CycleDetector;

@@ -3,25 +3,45 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.eclipse.ice</groupId>
-	<artifactId>org.eclipse.ice.workflow</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>org.eclipse.ice.workflow</name>
+	<artifactId>org.eclipse.ice.workflows</artifactId>
+	<version>3.0.0-SNAPSHOT</version>
+	<name>org.eclipse.ice.workflows</name>
+
 	<build>
-		<sourceDirectory>src</sourceDirectory>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.0</version>
+				<version>3.13.0</version>
 				<configuration>
-					<source>17</source>
-					<target>17</target>
+					<release>17</release>
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.eclipse.ice</groupId>
+							<artifactId>org.eclipse.ice.dev.annotations</artifactId>
+							<version>3.0.0-SNAPSHOT</version>
+						</path>
+					</annotationProcessorPaths>
 				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.3.0</version>
+			</plugin>
+			<plugin>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<version>3.1.2</version>
 			</plugin>
 		</plugins>
 	</build>
 
 	<properties>
-		<org.springframework.version>5.0.6.RELEASE</org.springframework.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.version>17</java.version>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
+		<maven.compiler.release>17</maven.compiler.release>
+		<org.springframework.version>5.2.7.RELEASE</org.springframework.version>
+		<spring-statemachine-version>2.2.0.RELEASE</spring-statemachine-version>
 	</properties>
 
 	<dependencies>
@@ -46,6 +66,11 @@
 			<groupId>org.netbeans.external</groupId>
 			<artifactId>org-apache-commons-lang3</artifactId>
 			<version>RELEASE130</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.ice</groupId>
+			<artifactId>org.eclipse.ice.dev.annotations</artifactId>
+			<version>3.0.0-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 
