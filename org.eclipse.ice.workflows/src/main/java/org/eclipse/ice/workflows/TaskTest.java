@@ -1,4 +1,4 @@
-package org.eclipse.ice.workflow;
+package org.eclipse.ice.workflows;
 
 // This is an old experiment I was doing. It has some value, so keeping for now and will delete later.
 // Currently completely disabled for the build.
@@ -19,8 +19,8 @@ import org.springframework.statemachine.config.StateMachineBuilder.Builder;*/
 
 public class TaskTest {
 
-/*	static String name = "ICEIII/ice/org.eclipse.ice.workflow/src/main/resources/test1.txt";
-	static String newName = "ICEIII/ice/org.eclipse.ice.workflow/src/main/resources/test2.txt";
+/*	static String name = "ICEIII/ice/org.eclipse.ice.workflows/src/main/resources/test1.txt";
+	static String newName = "ICEIII/ice/org.eclipse.ice.workflows/src/main/resources/test2.txt";
 
 	static public StateMachine<WorkflowEngine.States, WorkflowEngine.Events> buildMachine()
 			throws Exception {

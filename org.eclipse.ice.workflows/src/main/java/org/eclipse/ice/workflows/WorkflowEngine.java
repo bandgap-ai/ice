@@ -1,4 +1,4 @@
-package org.eclipse.ice.workflow;
+package org.eclipse.ice.workflows;
 
 public class WorkflowEngine {
 

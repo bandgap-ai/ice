@@ -22,6 +22,7 @@
         <module>org.eclipse.ice.archetypes</module>
         <module>org.eclipse.ice.commands</module>
         <module>org.eclipse.ice.renderer</module>
+        <module>org.eclipse.ice.tasks</module>
     </modules>
 
     <profiles>
