@@ -1,0 +1,2 @@
+git fetch "https://gitlab.eclipse.org/mliveon/ice.git" 'set-sast-config-1'
+git checkout -b 'ice-set-sast-config-1' FETCH_HEAD
