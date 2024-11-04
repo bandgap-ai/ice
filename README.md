@@ -1,9 +1,7 @@
 # The Eclipse Integrated Computational Environment (ICE) Main Repository
 
 Please see [the website](https://www.eclipse.org/ice) for more information on the project.
-
 ## Build Instructions
-
 Checkout the project and execute
 ```bash
 mvn clean install
