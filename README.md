@@ -42,6 +42,10 @@ mvn archetype:generate -DarchetypeGroupId=org.eclipse.ice -DarchetypeArtifactId=
 
 The group and artifact ids above are examples and should be replaced with the correct ids for your use case.
 
+## Building Executables
+
+It is important to determine the type of executable required before attempting to build it. If the executable is going to be used for testing, it is best to build a JUnit test that can be run as part of the regular Maven lifecycle or from within an IDE. If a command line application is required, the @CommandLineApp from org.eclipse.ice.dev.annotations annotation can be applied to a method in the top-level domain class. This will automatically generate a main() method that calls the annotated method in a class named ${className}App, where ${className} is the name of the annotated class. After that, follow the shading method in [this article](https://www.baeldung.com/executable-jar-with-maven) to create an executable jar with all the dependencies using the `mvn clean compile` and `mvn package` commands, in that order. This will produce a jar file in the target/ directory with the name `<package-name>-shaded.jar` where `<package-name>` indicates the package name. This jar can be executed with `java -jar <package-name>-shaded.jar`.
+
 # Data Element Example
 
 There are a number of examples in the test and org.eclipse.ice.renderer packages. There is also a [gist available](https://code.ornl.gov/snippets/109).
