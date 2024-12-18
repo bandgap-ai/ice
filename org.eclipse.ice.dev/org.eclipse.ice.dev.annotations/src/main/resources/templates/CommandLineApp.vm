@@ -1,6 +1,8 @@
 package $package;
 
 import ${package}.${class};
+import org.jboss.weld.environment.se.Weld;
+import org.jboss.weld.environment.se.WeldContainer;
 
 /**
  * Command line application to run ${class} ${method}
@@ -8,13 +10,16 @@ import ${package}.${class};
 public final class ${class}App {
 
 	/**
-	 * Simple main printing some details about various simple graphs.
+	 * Main method that launches the Weld (Java CDI) container and executes the
+	 * application.
 	 */
 	public static void main(String[] args) {
 		System.out.println("Executing app.");
-		${class} appClass = new ${class}();
-		appClass.${method}();
-		
+		Weld weld = new Weld();
+        WeldContainer container = weld.initialize();
+        container.select(${class}.class).get().${method}();
+        container.shutdown();
+			
 		return;
 	}
 }
