@@ -55,6 +55,10 @@ import jakarta.inject.Inject;
 @ApplicationScoped
 public class FileTransferWorkflow {
 
+	public record Dependency(Task a, Task b) {
+	};
+
+	
 //	@Action
 //	UIRunner fileUI;
 
@@ -68,18 +72,11 @@ public class FileTransferWorkflow {
 
 	private DependencyBuilder depBuilder;
 
-//	public FileTransferWorkflow() {
-//		this.depBuilder = new DependencyBuilder();
-//	}
-
 	@Inject
 	public FileTransferWorkflow(DependencyBuilder depBuilder) {
 		this.depBuilder = depBuilder;
 	}
 //	}
-
-	public record Dependency(Task a, Task b) {
-	};
 
 	@CommandLineApp
 	public void runApp() {
@@ -92,18 +89,32 @@ public class FileTransferWorkflow {
 		}
 	}
 
+	//@Inject
+	// How the fuck do I do this? I used Dynamic services and a factory in 2.x.
+	// Need to do @Inject @Any and catch an Instance<Iterable>
+	//private FileListTask<FileListData> fileListTask;
+	
 	public void setDependencies() throws TaskException {
 
+		/* Start small:
+		 * GetFileList -> WriteFileList
+		 */
+		
 		/*
-		 * 'Airplane' diagram workflow
+		 * 'Airplane' workflow diagram 
 		 * 
-		 * / - E - \ A - \ /- - F - -\ > C - D - < - - G - - > - J B - / \- - H - -/ \ -
-		 * I - /
+		 *                  / - E - \ 
+		 * A - \           /- - F - -\ 
+		 *      > C - D - < - - G - - > - J 
+		 * B - /           \- - H - -/ 
+		 *                  \ - I - /
 		 */
 
+		// Just using one task state data object for testing. A real application would use multiple.
+		TaskStateData data = TaskStateDataImplementation.builder().build();
 		// Two ways to do it. 1. Full declaration, total verbosity.
 		// Declare tasks.
-		TaskStateData data = TaskStateDataImplementation.builder().build();
+		// Usually this would be Task<T> for some action data type, but that can be ignored for now.
 		Task a = new Task(data);
 		Task b = new Task(data);
 		Task c = new Task(data);
@@ -134,16 +145,12 @@ public class FileTransferWorkflow {
 
 		// Succinct functional method - Tasks and deps declared simultaneously
 		// using names, etc.
-		// DependencyBuilder.connectAll(Set.of("a","b"),"c").connect("c","d").connectAll("d",Set.of("e","f","g","h","i")).connectAll(Set.of("e","f","g","h","i"),"j");
+		// tailSet = Set.of("a","b")
+		// wingSet = Set.of("e","f","g","h","i")
+		// DependencyBuilder.connectAll(tailSet,"c").connect("c","d").connectAll("d",wingSet).connectAll(wingSet,"j");
 
 		// Inheritance version
-		// connectAll(Set.of("a","b"),"c").connect("c","d").connectAll("d",Set.of("e","f","g","h","i")).connectAll(Set.of("e","f","g","h","i"),"j");
-
-		// Can it be done without a static builder or inheritance?
-		// - Inheritance is fine and will eliminate the static builder.
-		// - Static builder is fine and can eliminate the need for inheritance.
-		// > The static builder can be eliminated by using an injected, locally scoped
-		// builder.
+		// connectAll(tailSet,"c").connect("c","d").connectAll("d",wingSet).connectAll(wingSet,"j");
 
 	}
 }

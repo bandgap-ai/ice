@@ -32,7 +32,7 @@ import org.junit.jupiter.api.Test;
  *
  */
 class TaskTest {
-
+	
 	/**
 	 * This test verifies that an exception is thrown when the state data is not
 	 * initialized.
