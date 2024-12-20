@@ -6,16 +6,18 @@
 		<version>3.0.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>org.eclipse.ice.tests.util.data</artifactId>
-	<name>Eclipse ICE Test Data</name>
+	<name>Eclipse ICE Test Utilities - Data</name>
 	<description>Test data and configuration retrieval utilities</description>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
+	</properties>
 	<build>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.8.1</version>
-				<configuration>
-					<release>11</release>
-				</configuration>
 			</plugin>
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
