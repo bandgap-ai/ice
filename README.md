@@ -61,6 +61,10 @@ a pull request on our GitHub repo.
 
 If you're using Eclipse for development, you need to install Lombok into the Eclipse environment so that Eclipse knows about the bytecode changes that Lombok makes during the build process. Instructions are available [at the Lombok site](https://projectlombok.org/setup/eclipse).
 
+# Parallel Builds
+
+The build currently runs in less than a minute, but those interested in parallel builds should checkout [the official parallel build support in Maven 3](https://cwiki.apache.org/confluence/display/MAVEN/Parallel+builds+in+Maven+3).
+
 # Contacting the development team
 
 Please submit a ticket or pull request to contact the team. Alternatively, use the [ice-dev@eclipse.org mailing list](https://accounts.eclipse.org/mailing-list/ice-dev) to post questions.
