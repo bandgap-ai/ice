@@ -70,11 +70,13 @@ public class FileTransferWorkflow {
 //		addTask(fileUI,new UIData());
 //		addTask(fileTransfer, new FileTransferData());
 
+	@Inject
 	private DependencyBuilder depBuilder;
 
-	@Inject
-	public FileTransferWorkflow(DependencyBuilder depBuilder) {
-		this.depBuilder = depBuilder;
+	// How does this behave with inheritance?
+
+	public FileTransferWorkflow() {
+		//this.depBuilder = depBuilder;
 	}
 //	}
 
@@ -111,20 +113,20 @@ public class FileTransferWorkflow {
 		 */
 
 		// Just using one task state data object for testing. A real application would use multiple.
-		TaskStateData data = TaskStateDataImplementation.builder().build();
+		TaskStateData stateData = TaskStateDataImplementation.builder().build();
 		// Two ways to do it. 1. Full declaration, total verbosity.
 		// Declare tasks.
-		// Usually this would be Task<T> for some action data type, but that can be ignored for now.
-		Task a = new Task(data);
-		Task b = new Task(data);
-		Task c = new Task(data);
-		Task d = new Task(data);
-		Task e = new Task(data);
-		Task f = new Task(data);
-		Task g = new Task(data);
-		Task h = new Task(data);
-		Task i = new Task(data);
-		Task j = new Task(data);
+		// Usually this would be Task<T> for some action data type (domain data), but that can be ignored for now.
+		Task a = new Task(stateData);
+		Task b = new Task(stateData);
+		Task c = new Task(stateData);
+		Task d = new Task(stateData);
+		Task e = new Task(stateData);
+		Task f = new Task(stateData);
+		Task g = new Task(stateData);
+		Task h = new Task(stateData);
+		Task i = new Task(stateData);
+		Task j = new Task(stateData);
 		// Declare dependencies
 		ArrayList<Dependency> deps = new ArrayList<Dependency>();
 		deps.add(new Dependency(a, c));
