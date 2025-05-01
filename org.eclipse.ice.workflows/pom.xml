@@ -13,7 +13,6 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.13.0</version>
 				<configuration>
-					<release>17</release>
 					<annotationProcessorPaths>
 						<path>
 							<groupId>org.eclipse.ice</groupId>
@@ -88,7 +87,6 @@
 		<java.version>17</java.version>
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>
-		<maven.compiler.release>17</maven.compiler.release>
 		<org.springframework.version>5.2.7.RELEASE</org.springframework.version>
 		<spring-statemachine-version>2.2.0.RELEASE</spring-statemachine-version>
 	</properties>
