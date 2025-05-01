@@ -349,8 +349,15 @@ class DataElementProcessorTest {
 	@Test
 	void testDataFieldOnClassFails() {
 		Compilation compilation = helper.compile(Inputs.DATAFIELD_ON_CLASS.get());
+		String version[] = System.getProperty("java.version").split("\\.");
+		int majorVersion = Integer.parseInt(version[0]);
+		if (majorVersion >= 2) {
+			assertThat(compilation)
+			.hadErrorContaining("annotation interface not applicable to this kind of declaration");
+		} else {
 		assertThat(compilation)
 			.hadErrorContaining("annotation type not applicable");
+		}
 	}
 
 	/**
@@ -359,8 +366,16 @@ class DataElementProcessorTest {
 	@Test
 	void testDataFieldOnMethodFails() {
 		Compilation compilation = helper.compile(Inputs.DATAFIELD_ON_METHOD.get());
-		assertThat(compilation)
-			.hadErrorContaining("annotation type not applicable");
+		String version[] = System.getProperty("java.version").split("\\.");
+		int majorVersion = Integer.parseInt(version[0]);
+		if (majorVersion >= 2) {
+			assertThat(compilation)
+			.hadErrorContaining("annotation interface not applicable to this kind of declaration");
+		} else {
+			assertThat(compilation)
+			.hadErrorContaining("annotation type not applicable");	
+		}
+		
 	}
 
 	/**

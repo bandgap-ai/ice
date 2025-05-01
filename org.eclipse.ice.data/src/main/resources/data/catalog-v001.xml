@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <catalog prefer="public" xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
-    <group id="Folder Repository, directory=, recursive=true, Auto-Update=true, version=2" prefer="public" xml:base=""/>
+	<!-- I don't exactly remember the purpose of this file. I'll look into it another time. ~JJB 20250221 19:12 -->
+    <!-- <group id="Folder Repository, directory=, recursive=true, Auto-Update=true, version=2" prefer="public" xml:base=""><public id="some_id"/></group>-->
+    <group><public uri="http://fluffy" publicId="1"></public></group>
 </catalog>

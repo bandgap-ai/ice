@@ -20,7 +20,7 @@ import org.eclipse.ice.dev.annotations.Persisted;
  * @author Daniel Bluhm
  */
 @DataElement(name = "TestElement")
-@Persisted(collection = TestElementPersistenceHandlerTest.COLLECTION)
+@Persisted(collection = "test")
 public class TestElementSpec {
 	@DataField private String test;
 }
