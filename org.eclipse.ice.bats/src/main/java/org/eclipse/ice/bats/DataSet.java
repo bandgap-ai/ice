@@ -32,8 +32,8 @@ import org.apache.jena.rdfconnection.RDFConnectionRemoteBuilder;
 import org.apache.jena.riot.Lang;
 import org.apache.jena.update.Update;
 import org.apache.jena.util.FileManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.core.Logger;
 
 /**
  * This class represents a set of data describing a topic or item of interest.
@@ -67,7 +67,7 @@ public class DataSet {
     /**
      * Log utility
      */
-    protected static final org.apache.logging.log4j.Logger logger = LogManager.getLogger(DataSet.class.getName());
+    protected static final Logger logger = LogManager.getLogger(DataSet.class.getName());
 
     /**
      * The default host which holds the dataset.
