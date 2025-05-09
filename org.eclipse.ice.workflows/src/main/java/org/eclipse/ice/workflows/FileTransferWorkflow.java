@@ -6,6 +6,7 @@ import org.eclipse.ice.tasks.Task;
 import org.eclipse.ice.tasks.TaskException;
 import org.eclipse.ice.tasks.TaskStateData;
 import org.eclipse.ice.tasks.TaskStateDataImplementation;
+import org.eclipse.ice.tasks.primitives.MoveTask;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -70,6 +71,8 @@ public class FileTransferWorkflow {
 //		addTask(fileUI,new UIData());
 //		addTask(fileTransfer, new FileTransferData());
 
+	private MoveTask moveTask;
+	
 	@Inject
 	private DependencyBuilder depBuilder;
 
@@ -94,6 +97,7 @@ public class FileTransferWorkflow {
 	//@Inject
 	// How the fuck do I do this? I used Dynamic services and a factory in 2.x.
 	// Need to do @Inject @Any and catch an Instance<Iterable>
+	// - Glad I left this note! ~JJB 20250509.
 	//private FileListTask<FileListData> fileListTask;
 	
 	public void setDependencies() throws TaskException {
