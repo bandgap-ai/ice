@@ -6,6 +6,10 @@ Please see [the website](https://www.eclipse.org/ice) for more information on th
 
 The Maven build is the preferred build for ICE. Eclipse will often report errors that don't exist in the Maven build, and it may be necessary to run `Project->Clean...` or other tasks to get Eclipse to stop reporting ghost errors.
 
+The most common "errors" are:
+1. Lombok is not installed in the Eclipse IDE.
+2. For a given bundle, the `target/generated-sources/annotation` folder is not included on the project build path.
+
 ## Build Instructions
 
 Checkout the project and execute
