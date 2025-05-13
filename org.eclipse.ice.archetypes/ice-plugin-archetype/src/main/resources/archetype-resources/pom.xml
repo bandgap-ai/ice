@@ -10,6 +10,12 @@
 		${artifactId}</artifactId>
 	<version>${version}</version>
 	
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
+	</properties>
+	
 	<build>
 		<plugins>
 			<plugin>
@@ -50,20 +56,11 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-failsafe-plugin</artifactId>
-				<version>3.1.2</version>
+				<version>3.3.0</version>
 			</plugin>
 
 		</plugins>
 	</build>
-	
-
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.source>17</maven.compiler.source>
-		<maven.compiler.target>17</maven.compiler.target>
-		<org.springframework.version>5.2.7.RELEASE</org.springframework.version>
-		<spring-statemachine-version>2.2.0.RELEASE</spring-statemachine-version>
-	</properties>
 
 	<dependencies>
 	<dependency>
@@ -159,19 +156,6 @@
 			<version>2.16.0</version>
 			<scope>compile</scope>
 		</dependency>
-		<!-- Testing dependencies -->
-		<dependency>
-			<groupId>org.junit.jupiter</groupId>
-			<artifactId>junit-jupiter-api</artifactId>
-			<version>5.6.2</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.junit.jupiter</groupId>
-			<artifactId>junit-jupiter-engine</artifactId>
-			<version>5.6.2</version>
-			<scope>test</scope>
-		</dependency>
 		<dependency>
 			<groupId>com.google.testing.compile</groupId>
 			<artifactId>compile-testing</artifactId>
@@ -182,12 +166,6 @@
 			<groupId>org.mongodb</groupId>
 			<artifactId>mongo-java-driver</artifactId>
 			<version>3.12.2</version>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.ice</groupId>
-			<artifactId>org.eclipse.ice.data</artifactId>
-			<version>3.0.0-SNAPSHOT</version>
-			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
