@@ -31,13 +31,21 @@ mvn clean install -P full
 ## Using the project generators
 
 Once the build is complete, use the project generators to get started with a new Eclipse ICE project. From the shell, execute the following for a basic project:
-```bash
+
+```
 mvn archetype:generate -DarchetypeGroupId=org.eclipse.ice -DarchetypeArtifactId=data-element-archetype -DarchetypeVersion=1.0-SNAPSHOT -DgroupId=com.test -DartifactId=testApp
 ```
 
 For a web form project, execute the following
-```bash
+
+```
 mvn archetype:generate -DarchetypeGroupId=org.eclipse.ice -DarchetypeArtifactId=data-element-webform-archetype -DarchetypeVersion=1.0-SNAPSHOT -DgroupId=com.test -DartifactId=testApp
+```
+
+For an ICE plugin project, execute the following:
+
+```
+mvn archetype:generate -DarchetypeGroupId=org.eclipse.ice -DarchetypeArtifactId=ice-plugin-archetype -DarchetypeVersion=3.0-SNAPSHOT -DgroupId=com.test -DartifactId=testApp
 ```
 
 The group and artifact ids above are examples and should be replaced with the correct ids for your use case.

@@ -16,8 +16,8 @@ import org.eclipse.ice.data.IDataElement;
 /**
  * 
  * Tasks are executed by workflows, either fully automated workflows (such as 
- * ICE workflows) or workflows controlled by intelligent agents without full 
- * automation.
+ * ICE workflows) or workflows controlled by intelligent agents with partial 
+ * automation and *-in-the-loop behavior.
  * 
  * Tasks combine Actions and data (templated on 
  * {@link org.eclipse.ice.data.IDataElement} classes). They also include 
@@ -44,13 +44,13 @@ import org.eclipse.ice.data.IDataElement;
  * configured to indicate that they are ready to be executed.
  * 
  * Tasks cannot execute without both action data and an action. Executing
- * without an action is impossible by definition. Executing without action data
+ * without an action is impossible by definition. Executing with action data
  * is a design choice to encourage the development of actions with data
  * separated from the implementation. This makes it possible to have well-
  * scoped actions with minimal hardwiring or blob type code.
  * 
  * Tasks store state data externally and do not control their own storage. Thus
- * the must be configured when built to store state to the proper location. 
+ * they must be configured when built to store state to the proper location. 
  * State data storage is separate from client data storage, which is tracked by
  * individual data models. State data refers specifically to data that tracks 
  * the status of the Task, not data that is used as input or gathered as output 
