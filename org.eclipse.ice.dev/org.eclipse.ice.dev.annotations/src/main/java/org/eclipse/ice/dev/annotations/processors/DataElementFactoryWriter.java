@@ -1,15 +1,13 @@
 /*******************************************************************************
- * Copyright (c) 2020- UT-Battelle, LLC.
+ * Copyright (c) 2025- The Band Gap Corporation
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *    Daniel Bluhm - Initial implementation
- *    Michael Walsh - Modifications
+ *    Jay Jay Billings - Initial implementation
  *******************************************************************************/
-
 package org.eclipse.ice.dev.annotations.processors;
 
 import java.io.IOException;
@@ -17,24 +15,16 @@ import java.io.Writer;
 
 import javax.annotation.processing.Filer;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
- * Writer for DataElement Interfaces.
- *
- * @author Daniel Bluhm
+ * This writer is used for created Data Element Factories from the Velocity 
+ * template.
+ * @author Jay Jay Billings
  */
-public class InterfaceWriter
-	extends VelocitySourceWriter
-	implements GeneratedFileWriter
-{
-
-	/**
-	 * Location of Interface template for use with velocity.
-	 *
-	 * Use of Velocity ClasspathResourceLoader means files are discovered
-	 * relative to the src/main/resources folder.
-	 */
-	private static final String TEMPLATE = "templates/ElementInterface.vm";
-
+public class DataElementFactoryWriter extends VelocitySourceWriter implements GeneratedFileWriter {
+	
 	/**
 	 * Context key for package.
 	 */
@@ -44,42 +34,38 @@ public class InterfaceWriter
 	 * Context key for interface.
 	 */
 	private static final String INTERFACE = "interface";
-
+	
 	/**
-	 * Context key for fields.
+	 * Logging tool
 	 */
-	private static final String FIELDS = "fields";
-
-	/**
-	 * Context key for types.
-	 */
-	private static final String TYPES = "types";
-
+	private static final Logger logger = LoggerFactory.getLogger(CommandLineAppWriter.class);
+	
 	/**
 	 * Fully qualified name of generated interface;
 	 */
 	private String fullyQualifiedName;
-
+	
+	/**
+	 * Location of CommandLineApp template for use with Velocity.
+	 */
+	private static final String IMPL_TEMPLATE = "templates/DataElementFactory.vm";
 
 	/**
 	 * Constructor
-	 *
+	 * 
 	 * @param data the metadata for the data element currently being processed
 	 */
-	public InterfaceWriter(
-		DataElementMetadata data
-	) {
-		super(TEMPLATE);
-		this.fullyQualifiedName = data.getFullyQualifiedName();
-		Fields fields = data.getFields().getNonDefaultFields();
+	public DataElementFactoryWriter(DataElementMetadata data) {
+		super(IMPL_TEMPLATE);
+		this.fullyQualifiedName = data.getFullyQualifiedName() + "Factory";
 		context.put(PACKAGE, data.getPackageName());
 		context.put(INTERFACE, data.getName());
-		context.put(FIELDS, fields);
-		context.put(TYPES, fields.getTypes());
 	}
 
 	@Override
 	public Writer openWriter(Filer filer) throws IOException {
+		logger.debug("Apache velocity context for @DataElement factory: " + context);
 		return filer.createSourceFile(fullyQualifiedName).openWriter();
 	}
+
 }

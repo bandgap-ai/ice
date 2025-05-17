@@ -62,14 +62,10 @@ public class ImplementationWriter
 	 */
 	private String fullyQualifiedName;
 
-		/**
+	/**
 	 * Constructor
 	 *
-	 * @param packageName
-	 * @param interfaceName
-	 * @param className
-	 * @param fields
-	 * @param generatedFile
+	 * @param data the metadata for the data element currently being processed
 	 */
 	public ImplementationWriter(DataElementMetadata data) {
 		super(IMPL_TEMPLATE);

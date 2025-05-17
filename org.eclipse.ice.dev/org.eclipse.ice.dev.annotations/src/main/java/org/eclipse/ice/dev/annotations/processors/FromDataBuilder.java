@@ -35,6 +35,9 @@ import org.slf4j.LoggerFactory;
  * instance that happened to come first in the pool to be ignored when building
  * objects.
  *
+ * 20250513 - It strikes me that this is a bullshit class and should be deleted
+ * at the earliest possible opportunity. ~JJB
+ *
  * @author Daniel Bluhm
  */
 public class FromDataBuilder<T> {

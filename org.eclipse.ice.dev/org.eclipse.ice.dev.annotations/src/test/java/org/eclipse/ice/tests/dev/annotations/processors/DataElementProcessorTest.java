@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020- UT-Battelle, LLC.
+ * Copyright (c) 2020- UT-Battelle, LLC., 2025- The Band Gap Corporation
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -7,6 +7,7 @@
  *
  * Contributors:
  *    Daniel Bluhm - Initial implementation
+ *    Jay Jay Billings - Enhancements
  *******************************************************************************/
 
 package org.eclipse.ice.tests.dev.annotations.processors;
@@ -41,7 +42,7 @@ import lombok.AllArgsConstructor;
  * }
  * </pre>
  * @author Daniel Bluhm
- *
+ * @author Jay Jay Billings
  */
 class DataElementProcessorTest {
 
@@ -61,6 +62,11 @@ class DataElementProcessorTest {
 	 */
 	private static final String IMPLEMENTATION = "TestImplementation";
 
+	/**
+	 * Fully qualified name of the generated implementation.
+	 */
+	private static final String FACTORY = "TestFactory";
+	
 	/**
 	 * Logger.
 	 */
@@ -116,14 +122,19 @@ class DataElementProcessorTest {
 	private static enum Patterns implements JavaFileObjectResource {
 		DEFAULTS_INT("Defaults.java"),
 		DEFAULTS_IMPL("DefaultsImplementation.java"),
+		DEFAULTS_FACTORY("DefaultsFactory.java"),
 		SINGLE_INT("Single.java"),
 		SINGLE_IMPL("SingleImplementation.java"),
+		SINGLE_FACTORY("SingleFactory.java"),
 		MANY_INT("Many.java"),
 		MANY_IMPL("ManyImplementation.java"),
+		MANY_FACTORY("ManyFactory.java"),
 		SINGLE_NON_PRIMITIVE_INT("SingleNonPrimitive.java"),
 		SINGLE_NON_PRIMITIVE_IMPL("SingleNonPrimitiveImplementation.java"),
+		SINGLE_NON_PRIMITIVE_FACTORY("SingleNonPrimitiveFactory.java"),
 		MANY_NON_PRIMITIVE_INT("ManyNonPrimitive.java"),
 		MANY_NON_PRIMITIVE_IMPL("ManyNonPrimitiveImplementation.java"),
+		MANY_NON_PRIMITIVE_FACTORY("ManyNonPrimitiveFactory.java"),
 		ACCESSIBILITY_PRESERVED("AccessibilityPreserved.java"),
 		DATAFIELD_GETTER_INT("Getter.java"),
 		DATAFIELD_SETTER_INT("Setter.java"),
@@ -160,7 +171,6 @@ class DataElementProcessorTest {
 	}
 
 	/**
-
 	 * Assert that the interface generated in this compilation matches the given
 	 * pattern.
 	 * @param compilation about which the assertion is made
@@ -188,12 +198,26 @@ class DataElementProcessorTest {
 	}
 
 	/**
+	 * Assert that the factory generated in this compilation matches the given
+	 * pattern.
+	 * @param compilation about which the assertion is made
+	 * @param factory factory pattern
+	 */
+	private static void assertFactoryMatches(Compilation compilation, JavaFileObject factory) {
+		assertThat(compilation)
+			.generatedSourceFile(FACTORY)
+			.containsElementsIn(factory);
+	}
+	
+	
+	/**
 	 * Assert that the default fields were generated.
 	 * @param compilation about which the assertion is made
 	 */
 	private static void assertDefaultsPresent(Compilation compilation) {
 		assertInterfaceMatches(compilation, Patterns.DEFAULTS_INT.get());
 		assertImplementationMatches(compilation, Patterns.DEFAULTS_IMPL.get());
+		assertFactoryMatches(compilation, Patterns.DEFAULTS_FACTORY.get());
 	}
 
 	/**
@@ -260,6 +284,7 @@ class DataElementProcessorTest {
 		assertSucceededAndLogWarnings(compilation);
 		assertInterfaceMatches(compilation, Patterns.SINGLE_INT.get());
 		assertImplementationMatches(compilation, Patterns.SINGLE_IMPL.get());
+		assertFactoryMatches(compilation, Patterns.SINGLE_FACTORY.get());
 	}
 
 	/**
@@ -271,6 +296,7 @@ class DataElementProcessorTest {
 		assertSucceededAndLogWarnings(compilation);
 		assertInterfaceMatches(compilation, Patterns.MANY_INT.get());
 		assertImplementationMatches(compilation, Patterns.MANY_IMPL.get());
+		assertFactoryMatches(compilation, Patterns.MANY_FACTORY.get());
 	}
 
 	/**
@@ -282,6 +308,7 @@ class DataElementProcessorTest {
 		assertSucceededAndLogWarnings(compilation);
 		assertInterfaceMatches(compilation, Patterns.SINGLE_NON_PRIMITIVE_INT.get());
 		assertImplementationMatches(compilation, Patterns.SINGLE_NON_PRIMITIVE_IMPL.get());
+		assertFactoryMatches(compilation, Patterns.SINGLE_NON_PRIMITIVE_FACTORY.get());
 	}
 
 	/**
@@ -293,6 +320,7 @@ class DataElementProcessorTest {
 		assertSucceededAndLogWarnings(compilation);
 		assertInterfaceMatches(compilation, Patterns.MANY_NON_PRIMITIVE_INT.get());
 		assertImplementationMatches(compilation, Patterns.MANY_NON_PRIMITIVE_IMPL.get());
+		assertFactoryMatches(compilation, Patterns.MANY_NON_PRIMITIVE_FACTORY.get());
 	}
 
 	/**

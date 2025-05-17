@@ -24,7 +24,7 @@ import java.lang.annotation.Target;
  * the new application.
  * 
  * Unlike other ICE annotations, CommandLineApp will only produce an
- * implementation, not and interface and an implementation. An interface is
+ * implementation, not an interface and an implementation. An interface is
  * not needed since main() is implemented as a function in its own class.
  * 
  * @author Jay Jay Billings

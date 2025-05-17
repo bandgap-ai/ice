@@ -1,0 +1,32 @@
+#if($package)
+package $package;
+#end
+
+import org.eclipse.ice.data.IDataElement;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.inject.Produces;
+
+#imports
+
+/**
+ * This is a factory for creating ${interface} instances.
+ */
+@ApplicationScoped
+public class ${interface}Factory {
+	
+	/**
+	 * This function produces a default (i.e., nullary-constructed) instance
+	 * of ${interface}. 
+	 */
+	@Produces public ${interface} build() throws Exception {
+		return ${interface}Implementation.builder().build();
+	}
+
+	/**
+	 * This function returns the configurable builder that can be used to
+	 * create customized instances of ${interface}.
+	 */	
+	@Produces public ${interface}Implementation.${interface}ImplementationBuilder builder() {
+		return ${interface}Implementation.builder();
+	}
+}

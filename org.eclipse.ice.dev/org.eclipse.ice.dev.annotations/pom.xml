@@ -31,7 +31,7 @@
 						<path>
 							<groupId>com.google.auto.service</groupId>
 							<artifactId>auto-service</artifactId>
-							<version>1.0-rc6</version>
+							<version>1.1.1</version>
 						</path>
 						<path>
 							<groupId>org.projectlombok</groupId>
@@ -155,7 +155,7 @@
 		<dependency>
 			<groupId>com.google.auto.service</groupId>
 			<artifactId>auto-service</artifactId>
-			<version>1.0-rc6</version>
+			<version>1.1.1</version>
 			<scope>provided</scope>
 		</dependency>
 		<!-- Lombok -->

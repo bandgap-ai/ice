@@ -44,6 +44,7 @@ public class DataElementWriterGenerator implements WriterGenerator {
 		List<GeneratedFileWriter> writers = new ArrayList<>();
 		writers.add(new InterfaceWriter(data));
 		writers.add(new ImplementationWriter(data));
+		writers.add(new DataElementFactoryWriter(data));
 		try {
 			writers.add(new TypeScriptWriter(data));
 		} catch (UnsupportedOperationException e) {
