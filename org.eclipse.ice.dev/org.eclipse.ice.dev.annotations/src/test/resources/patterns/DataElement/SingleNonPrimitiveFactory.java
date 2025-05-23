@@ -1,4 +1,3 @@
-import org.eclipse.ice.data.IDataElement;
 import org.eclipse.ice.data.IDataElementFactory;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.Produces;
