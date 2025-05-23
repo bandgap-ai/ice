@@ -1,4 +1,5 @@
 import org.eclipse.ice.data.IDataElement;
+import org.eclipse.ice.data.IDataElementFactory;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.Produces;
 
@@ -7,7 +8,7 @@ import jakarta.enterprise.inject.Produces;
  * This is a factory for creating Test instances.
  */
 @ApplicationScoped
-public class TestFactory {
+public class TestFactory implements IDataElementFactory<Test> {
 	
 	/**
 	 * This function produces a default (i.e., nullary-constructed) instance
