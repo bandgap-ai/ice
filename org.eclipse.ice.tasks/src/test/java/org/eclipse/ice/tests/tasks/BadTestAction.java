@@ -13,8 +13,8 @@ package org.eclipse.ice.tests.tasks;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import org.eclipse.ice.tasks.Action;
-import org.eclipse.ice.tasks.ActionType;
+import org.eclipse.ice.tasks.IAction;
+import org.eclipse.ice.tasks.IActionType;
 
 /**
  * This is a test action used to test the Task class. It "fails" by returning
@@ -23,7 +23,7 @@ import org.eclipse.ice.tasks.ActionType;
  * @author Jay Jay Billings
  *
  */
-public class BadTestAction<T> implements Action<T> {
+public class BadTestAction<T> implements IAction<T> {
 
 	/**
 	 * True if the run operation is called, false if not.
@@ -34,8 +34,8 @@ public class BadTestAction<T> implements Action<T> {
 	 * @return a diagnostic action type since this is a test
 	 */
 	@Override
-	public ActionType getType() {
-		return ActionType.BASIC.DIAGNOSTIC;
+	public IActionType getType() {
+		return IActionType.BASIC.DIAGNOSTIC;
 	}
 
 	@Override

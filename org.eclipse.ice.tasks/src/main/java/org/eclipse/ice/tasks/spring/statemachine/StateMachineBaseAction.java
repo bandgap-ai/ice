@@ -50,7 +50,7 @@ public abstract class StateMachineBaseAction<T> implements Action<TaskState, Tas
 	 * The ICE action executed by the Task. This is an optional member that may be
 	 * supplied to subclasses that require it, so see their documentation.
 	 */
-	protected AtomicReference<org.eclipse.ice.tasks.Action<T>> taskAction;
+	protected AtomicReference<org.eclipse.ice.tasks.IAction<T>> taskAction;
 
 	/**
 	 * The ICE action data needed to execute the task. This is an optional member
@@ -80,7 +80,7 @@ public abstract class StateMachineBaseAction<T> implements Action<TaskState, Tas
 		this.actionData.set(actionData);
 	}
 
-	public void setTaskAction(org.eclipse.ice.tasks.Action<T> action) {
+	public void setTaskAction(org.eclipse.ice.tasks.IAction<T> action) {
 		taskAction.set(action);
 	}
 

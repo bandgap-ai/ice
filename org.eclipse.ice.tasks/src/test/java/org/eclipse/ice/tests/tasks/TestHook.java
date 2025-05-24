@@ -11,7 +11,7 @@
  *****************************************************************************/
 package org.eclipse.ice.tests.tasks;
 
-import org.eclipse.ice.tasks.ActionType;
+import org.eclipse.ice.tasks.IActionType;
 import org.eclipse.ice.tasks.Hook;
 
 /**
@@ -21,7 +21,7 @@ import org.eclipse.ice.tasks.Hook;
 public class TestHook<T> implements Hook<T> {
 
 	@Override
-	public ActionType getType() {
+	public IActionType getType() {
 		// TODO Auto-generated method stub
 		return null;
 	}

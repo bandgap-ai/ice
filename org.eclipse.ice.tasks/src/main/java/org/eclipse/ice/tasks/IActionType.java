@@ -26,7 +26,7 @@ package org.eclipse.ice.tasks;
  * @author Jay Jay Billings
  *
  */
-public interface ActionType {
+public interface IActionType {
 
 	/**
 	 * The basic action type is the base class for basic actions that are 
@@ -35,7 +35,7 @@ public interface ActionType {
 	 * @author Jay Jay Billings
 	 *
 	 */
-	public enum BASIC implements ActionType {
+	public enum BASIC implements IActionType {
 		
 		/**
 		 * Actions of this type move files
@@ -55,7 +55,7 @@ public interface ActionType {
 	 * @author Jay Jay Billings
 	 *
 	 */
-	public enum EXECUTABLE implements ActionType {
+	public enum EXECUTABLE implements IActionType {
 		
 		/**
 		 * Actions of this type are systems calls to local executables.
@@ -74,7 +74,7 @@ public interface ActionType {
 	 * @author Jay Jay Billings
 	 *
 	 */
-	public enum FUNCTION implements ActionType {
+	public enum FUNCTION implements IActionType {
 		
 		/**
 		 * Actions of this type call Java function.
@@ -90,7 +90,7 @@ public interface ActionType {
 	 * @author Jay Jay Billings
 	 *
 	 */
-	public enum HOOK implements ActionType {
+	public enum HOOK implements IActionType {
 		
 		/**
 		 * Pre-hook type. Preprocessors for the main Action. These hooks run 

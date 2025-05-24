@@ -15,7 +15,7 @@ package org.eclipse.ice.tasks;
  * Actions can be executed by Tasks and represent fundamental functional
  * units.
  * 
- * Actions have distinct types described by the {@link ActionType} enumeration.
+ * Actions have distinct types described by the {@link IActionType} enumeration.
  * 
  * Actions store state data externally and do not control their own storage. 
  * Thus the must be configured when built to store state to the proper 
@@ -27,13 +27,13 @@ package org.eclipse.ice.tasks;
  * @author Jay Jay Billings
  *
  */
-public interface Action<T> {
+public interface IAction<T> {
 
 	/**
 	 * This operation returns the type of the Action.
 	 * @return the type of the Action
 	 */
-	public ActionType getType();
+	public IActionType getType();
 	
 	/**
 	 * This operation executes the Action on the provided input data.

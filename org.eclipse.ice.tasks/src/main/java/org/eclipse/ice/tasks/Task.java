@@ -75,7 +75,7 @@ public class Task<T extends IDataElement<T>> implements ITask<T> {
 	/**
 	 * The action
 	 */
-	protected AtomicReference<org.eclipse.ice.tasks.Action<T>> action;
+	protected AtomicReference<org.eclipse.ice.tasks.IAction<T>> action;
 
 	/**
 	 * The state machine action used to execute the action
@@ -156,7 +156,7 @@ public class Task<T extends IDataElement<T>> implements ITask<T> {
 	}
 
 	@Override
-	public void setAction(org.eclipse.ice.tasks.Action<T> taskAction) throws TaskException {
+	public void setAction(org.eclipse.ice.tasks.IAction<T> taskAction) throws TaskException {
 
 		// Make sure the error is not null before updating the states
 		if (taskAction != null) {

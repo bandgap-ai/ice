@@ -20,7 +20,7 @@ package org.eclipse.ice.tasks;
  * @author Jay Jay Billings
  *
  */
-public interface Hook<T> extends Action<T> {
+public interface Hook<T> extends IAction<T> {
 
 	
 	

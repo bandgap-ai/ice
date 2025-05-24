@@ -13,7 +13,7 @@ package org.eclipse.ice.tasks.spring.statemachine;
 
 import java.util.concurrent.atomic.AtomicReference;
 
-import org.eclipse.ice.tasks.Action;
+import org.eclipse.ice.tasks.IAction;
 import org.eclipse.ice.tasks.TaskState;
 import org.eclipse.ice.tasks.TaskStateData;
 import org.eclipse.ice.tasks.TaskTransitionEvents;

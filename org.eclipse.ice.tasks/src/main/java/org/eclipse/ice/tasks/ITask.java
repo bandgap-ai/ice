@@ -111,7 +111,7 @@ public interface ITask<T extends IDataElement<T>> {
 	 * @param taskAction the task's action.
 	 * @exception an exception is thrown if the task action is null
 	 */
-	public void setAction(final Action<T> taskAction) throws Exception;
+	public void setAction(final IAction<T> taskAction) throws Exception;
 	
 	/**
 	 * This operation adds a hook to the task that will be executed in support
