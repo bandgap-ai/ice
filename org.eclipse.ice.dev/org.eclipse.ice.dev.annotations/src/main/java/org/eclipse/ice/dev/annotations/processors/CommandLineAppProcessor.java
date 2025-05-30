@@ -26,6 +26,7 @@ import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.Name;
 import javax.lang.model.element.TypeElement;
+import javax.lang.model.util.Elements;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,38 +48,24 @@ import com.google.auto.service.AutoService;
 @SupportedAnnotationTypes({ "org.eclipse.ice.dev.annotations.CommandLineApp" })
 @SupportedSourceVersion(SourceVersion.RELEASE_17)
 @AutoService(Processor.class)
-public class CommandLineAppProcessor extends AbstractProcessor {
+public class CommandLineAppProcessor extends SingleMethodAnnotationProcessor {
 
 	/**
 	 * Logging tool
 	 */
 	private static final Logger logger = LoggerFactory.getLogger(CommandLineAppProcessor.class);
 
+	/**
+	 * Default constructor that configures the logging text.
+	 */
+	public CommandLineAppProcessor() {
+		setErrorMsg("Cannot write CommandLineApp.");
+		setSuccessMsg("Command Line App successfully generated.");
+	}
+
 	@Override
-	public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
-		boolean retVal = false;
-
-		// Loop over all incoming annotations
-		for (TypeElement annotation : annotations) {
-			// Get the annotated elements
-			Set<? extends Element> annotatedElements = roundEnv.getElementsAnnotatedWith(annotation);
-
-			// Write each annotated element of CommandLineAppWriter. Note that the
-			// error checks are all handled within CommandLineAppWriter.
-			for (final Element element : annotatedElements) {
-				try {
-					GeneratedFileWriter appWriter = new CommandLineAppWriter(element, processingEnv.getElementUtils());
-					Writer filer = appWriter.openWriter(processingEnv.getFiler());
-					appWriter.write(filer);
-					filer.close();
-					logger.info("App generated.");
-				} catch (IOException e) {
-					logger.error("Cannot write CommandLineApp.", e);
-				}
-			}
-		}
-
-		return retVal;
+	protected GeneratedFileWriter getWriter(Element element, Elements elements) throws IOException {
+		return new CommandLineAppWriter(element, elements);
 	}
 
 }
