@@ -1,0 +1,43 @@
+package $package;
+
+import ${package}.${class};
+import org.jboss.weld.environment.se.Weld;
+import org.jboss.weld.environment.se.WeldContainer;
+import org.eclipse.ice.tasks.IAction;
+import org.eclipse.ice.tasks.IActionType;
+import java.io.Serializable;
+import jakarta.enterprise.context.Dependent;
+
+/**
+ * A generated implementation of IAction to run ${class}.${method}.
+ */
+@Dependent
+public class ${class}Action<${type}> implements IAction<${type}>, Serializable {
+
+	/**
+	 * Logger
+	 */
+	private static final Logger logger = LoggerFactory.getLogger(${class}Action.class);
+
+	@Inject
+	${class} actionImpl;
+
+	@Override
+	public IActionType getType() {
+		return IActionType.BASIC.DIAGNOSTIC;
+	}
+
+	@Override
+	public boolean run(${type} data) {
+		boolean retValue = false;
+		
+		try {
+			retVal = ${class}Action.${method}(data);
+		} catch (Exception e) {
+			String msg = "Execution of ${class}.${method} by failed."
+		    logger.error(msg, exception);
+		}
+		
+		return retVal;
+	}
+}

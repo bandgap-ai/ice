@@ -15,14 +15,15 @@ package org.eclipse.ice.tasks;
  * Actions can be executed by Tasks and represent fundamental functional
  * units.
  * 
- * Actions have distinct types described by the {@link IActionType} enumeration.
+ * Actions have distinct types described by the {@link IActionType} 
+ * enumeration.
  * 
  * Actions store state data externally and do not control their own storage. 
  * Thus the must be configured when built to store state to the proper 
  * location. State controllers should be provided by Tasks executing an action,
  * but Actions will attempt to store state locally by default if no controller
- * is provided. State storage is separate from data storage, which is tracked by
- * individual data models.
+ * is provided. State storage is separate from data storage, which is tracked 
+ * by individual data models.
  * 
  * @author Jay Jay Billings
  *

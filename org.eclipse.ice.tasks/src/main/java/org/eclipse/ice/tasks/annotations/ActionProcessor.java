@@ -9,7 +9,7 @@
  *   Initial API and implementation and/or initial documentation - 
  *   Jay Jay Billings
  *****************************************************************************/
-package org.eclipse.ice.dev.annotations.processors;
+package org.eclipse.ice.tasks.annotations;
 
 import java.io.IOException;
 import javax.annotation.processing.Processor;
@@ -19,44 +19,42 @@ import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.util.Elements;
 
+import org.eclipse.ice.dev.annotations.processors.GeneratedFileWriter;
+import org.eclipse.ice.dev.annotations.processors.SingleMethodAnnotationProcessor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.auto.service.AutoService;
 
 /**
- * This annotation processor builds simple command line applications based on
- * the @CommandLineApp annotation. It creates a simple Java application using a
- * Velocity template for a basic Java main() program.
- * 
- * This processor has no knowledge of the underlying build system for the
- * application, if there is one, and, as such, it does not attempt to update any
- * such build system to automatically package the new application. Clients must
- * implement that functionality separately.
+ * This annotation processor builds implementations of IAction using a Velocity
+ * template. See {@link org.eclipse.ice.tasks.annotations.Action}.
  * 
  * @author Jay Jay Billings
  */
-@SupportedAnnotationTypes({ "org.eclipse.ice.dev.annotations.CommandLineApp" })
+@SupportedAnnotationTypes({ "org.eclipse.ice.tasks.annotations.Action" })
 @SupportedSourceVersion(SourceVersion.RELEASE_17)
 @AutoService(Processor.class)
-public class CommandLineAppProcessor extends SingleMethodAnnotationProcessor {
+public class ActionProcessor extends SingleMethodAnnotationProcessor {
 
 	/**
 	 * Logging tool
 	 */
-	private static final Logger logger = LoggerFactory.getLogger(CommandLineAppProcessor.class);
+	private static final Logger logger = LoggerFactory.getLogger(ActionProcessor.class);
 
 	/**
 	 * Default constructor that configures the logging text.
 	 */
-	public CommandLineAppProcessor() {
-		setErrorMsg("Cannot write CommandLineApp.");
-		setSuccessMsg("Command Line App successfully generated.");
+	public ActionProcessor() {
+		setErrorMsg("Cannot write Action.");
+		System.out.println("FUCK ME!!!!");
+		setSuccessMsg("Action successfully generated.");
 	}
 
 	@Override
 	protected GeneratedFileWriter getWriter(Element element, Elements elements) throws IOException {
-		return new CommandLineAppWriter(element, elements);
+		System.out.println("FUCK ME AGAIN!!!!");
+		return new ActionWriter(element, elements);
 	}
 
 }

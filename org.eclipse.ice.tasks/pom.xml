@@ -27,8 +27,23 @@
 				<configuration>
 					<annotationProcessorPaths>
 						<path>
+							<groupId>com.google.auto.service</groupId>
+							<artifactId>auto-service</artifactId>
+							<version>1.0-rc6</version>
+						</path>
+						<path>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+							<version>1.18.30</version>
+						</path>
+						<path>
 							<groupId>org.eclipse.ice</groupId>
 							<artifactId>org.eclipse.ice.dev.annotations</artifactId>
+							<version>3.0.0-SNAPSHOT</version>
+						</path>
+						<path>
+							<groupId>org.eclipse.ice</groupId>
+							<artifactId>org.eclipse.ice.tasks</artifactId>
 							<version>3.0.0-SNAPSHOT</version>
 						</path>
 					</annotationProcessorPaths>
@@ -37,6 +52,15 @@
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>3.3.0</version>
+				<configuration>
+					<forkCount>1</forkCount>
+					<reuseForks>false</reuseForks>
+					<argLine>
+						--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED
+						--add-exports=jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED
+						--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED
+					</argLine>
+				</configuration>
 			</plugin>
 			<plugin>
 				<artifactId>maven-failsafe-plugin</artifactId>
@@ -68,6 +92,26 @@
 			<groupId>org.eclipse.ice</groupId>
 			<artifactId>org.eclipse.ice.dev.annotations</artifactId>
 			<version>3.0.0-SNAPSHOT</version>
+		</dependency>
+		<!-- Autoservice for annotation registration -->
+		<dependency>
+			<groupId>com.google.auto.service</groupId>
+			<artifactId>auto-service</artifactId>
+			<version>1.0-rc6</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- Lombok -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.30</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.google.testing.compile</groupId>
+			<artifactId>compile-testing</artifactId>
+			<version>0.21.0</version>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.statemachine</groupId>
