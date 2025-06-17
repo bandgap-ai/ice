@@ -47,7 +47,7 @@ public class ActionProcessor extends SingleMethodAnnotationProcessor {
 	 */
 	public ActionProcessor() {
 		setErrorMsg("Cannot write Action.");
-		System.out.println("FUCK ME!!!!");
+		System.out.println("Pardon ME!!!!");
 		setSuccessMsg("Action successfully generated.");
 	}
 
