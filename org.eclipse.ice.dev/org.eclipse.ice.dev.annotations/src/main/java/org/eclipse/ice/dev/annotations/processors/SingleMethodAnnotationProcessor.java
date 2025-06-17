@@ -102,16 +102,11 @@ public abstract class SingleMethodAnnotationProcessor extends AbstractProcessor 
 	public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
 		boolean retVal = false;
 
-		System.out.println("SOOOO fucked....");
-		
 		// Loop over all incoming annotations
 		for (TypeElement annotation : annotations) {
 			// Get the annotated elements
 			Set<? extends Element> annotatedElements = roundEnv.getElementsAnnotatedWith(annotation);
 
-			System.out.println("SOOOO fucked AGAIN....");
-			System.out.println(annotatedElements);
-			
 			// Write each annotated element of CommandLineAppWriter. Note that the
 			// error checks are all handled within CommandLineAppWriter.
 			for (final Element element : annotatedElements) {
@@ -123,8 +118,6 @@ public abstract class SingleMethodAnnotationProcessor extends AbstractProcessor 
 					logger.info(msgTxt);
 				} catch (IOException e) {
 					logger.error(errTxt, e);
-					System.out.println(errTxt);
-					System.out.println(e);
 				}
 			}
 		}

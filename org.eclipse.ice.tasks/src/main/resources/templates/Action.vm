@@ -6,13 +6,17 @@ import org.jboss.weld.environment.se.WeldContainer;
 import org.eclipse.ice.tasks.IAction;
 import org.eclipse.ice.tasks.IActionType;
 import java.io.Serializable;
+import jakarta.inject.Inject;
 import jakarta.enterprise.context.Dependent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import ${type};
 
 /**
  * A generated implementation of IAction to run ${class}.${method}.
  */
 @Dependent
-public class ${class}Action<${type}> implements IAction<${type}>, Serializable {
+public class ${class}Action implements IAction<${type}>, Serializable {
 
 	/**
 	 * Logger
@@ -29,13 +33,13 @@ public class ${class}Action<${type}> implements IAction<${type}>, Serializable {
 
 	@Override
 	public boolean run(${type} data) {
-		boolean retValue = false;
+		boolean retVal = false;
 		
 		try {
-			retVal = ${class}Action.${method}(data);
+			retVal = actionImpl.${method}(data);
 		} catch (Exception e) {
-			String msg = "Execution of ${class}.${method} by failed."
-		    logger.error(msg, exception);
+			String msg = "Execution of ${class}.${method} by failed.";
+		    logger.error(msg, e);
 		}
 		
 		return retVal;

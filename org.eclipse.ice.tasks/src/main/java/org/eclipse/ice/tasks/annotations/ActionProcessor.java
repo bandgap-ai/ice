@@ -21,6 +21,7 @@ import javax.lang.model.util.Elements;
 
 import org.eclipse.ice.dev.annotations.processors.GeneratedFileWriter;
 import org.eclipse.ice.dev.annotations.processors.SingleMethodAnnotationProcessor;
+import org.eclipse.ice.tasks.annotations.ActionWriter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -47,13 +48,12 @@ public class ActionProcessor extends SingleMethodAnnotationProcessor {
 	 */
 	public ActionProcessor() {
 		setErrorMsg("Cannot write Action.");
-		System.out.println("Pardon ME!!!!");
 		setSuccessMsg("Action successfully generated.");
 	}
 
 	@Override
 	protected GeneratedFileWriter getWriter(Element element, Elements elements) throws IOException {
-		System.out.println("FUCK ME AGAIN!!!!");
+		System.out.println("ActionWriter.getWriter()");
 		return new ActionWriter(element, elements);
 	}
 

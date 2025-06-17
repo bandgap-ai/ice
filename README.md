@@ -73,6 +73,8 @@ a pull request on our GitHub repo.
 
 If you're using Eclipse for development, you need to install Lombok into the Eclipse environment so that Eclipse knows about the bytecode changes that Lombok makes during the build process. Instructions are available [at the Lombok site](https://projectlombok.org/setup/eclipse).
 
+As a general rule, it is a superb idea to develop annotations in their own packages to avoid build loops where changes to an annotation and its Velocity template prevent the package itself from installing to local Maven repo properly. (The fix for that situation is to to revert the offending code and step through the changes incrementally to fix the error.)
+
 # Parallel Builds
 
 The build currently runs in less than a minute, but those interested in parallel builds should checkout [the official parallel build support in Maven 3](https://cwiki.apache.org/confluence/display/MAVEN/Parallel+builds+in+Maven+3).

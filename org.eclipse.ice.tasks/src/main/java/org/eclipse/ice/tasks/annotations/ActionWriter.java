@@ -17,8 +17,11 @@ import java.util.List;
 import javax.annotation.processing.Filer;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
+import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.PackageElement;
+import javax.lang.model.element.VariableElement;
+import javax.lang.model.type.TypeMirror;
 import javax.lang.model.util.Elements;
 
 import org.eclipse.ice.dev.annotations.processors.GeneratedFileWriter;
@@ -61,34 +64,23 @@ public class ActionWriter extends VelocitySourceWriter implements GeneratedFileW
 	 * @param element
 	 */
 	private void readElementProperties(Element element, Elements elementUtils) throws IOException {
-		// The expected annotated element is a public method.
+		
+		// Only proceed if the expected annotated element is a public method.
 		if (element != null && element.getKind() == ElementKind.METHOD
 				&& element.getModifiers().contains(Modifier.PUBLIC)) {
-			
-			// Need: Class, Method, Package, Type
-			
-			System.out.println("Read elements! --> " + element);
-			
+			ExecutableElement method = (ExecutableElement) element;
 			// Store the target method name
-			context.put("method", element.getSimpleName());
-			
-			System.out.println(element.asType());
-			
-			// Get the argument type of the method and store it as the "type".
-			
-			// Otherwise, if there is no argument or too many arguments,
-			// complain and abort.
-			List<? extends Element> paramTypes = element.getEnclosedElements();
-		//	System.out.println("Param size = " + paramTypes.size());
-			//System.out.println(paramTypes);
-			if (paramTypes.size() == 1) {
-		//		Element param = paramTypes.get(0);
-			//	context.put("type", param.getSimpleName());
-				//System.out.println(param);
+			context.put("method", method.getSimpleName().toString());
+			// Grab the input parameter and its type
+			List<? extends VariableElement> parameters = method.getParameters();
+			if (parameters.size() == 1) {
+				VariableElement param = parameters.get(0);
+				TypeMirror paramType = param.asType();
+				context.put("type", paramType.toString());
+				context.put("paramName", param.getSimpleName().toString());
 			} else {
 				throw new IOException("The method must take one argument for @Action.");
-			}
-			
+			}			
 			// Get the name of the class that owns the method
 			Element classElement = element.getEnclosingElement();
 			if (classElement.getKind() == ElementKind.CLASS) {
@@ -99,6 +91,8 @@ public class ActionWriter extends VelocitySourceWriter implements GeneratedFileW
 			// Get the name of the package that encloses the method.
 			PackageElement packageElement = elementUtils.getPackageOf(element);
 			context.put("package", packageElement.getQualifiedName());
+		} else {
+			throw new IOException("@Action can only be used on public methods.");
 		}
 	}
 
