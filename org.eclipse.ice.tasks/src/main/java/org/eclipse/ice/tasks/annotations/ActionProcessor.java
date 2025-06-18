@@ -1,5 +1,5 @@
 /******************************************************************************
- * Copyright (c) 2024- Amazon.com, LLC.
+ * Copyright (c) 2025- The Band Gap Corporation
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -21,7 +21,6 @@ import javax.lang.model.util.Elements;
 
 import org.eclipse.ice.dev.annotations.processors.GeneratedFileWriter;
 import org.eclipse.ice.dev.annotations.processors.SingleMethodAnnotationProcessor;
-import org.eclipse.ice.tasks.annotations.ActionWriter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -53,7 +52,6 @@ public class ActionProcessor extends SingleMethodAnnotationProcessor {
 
 	@Override
 	protected GeneratedFileWriter getWriter(Element element, Elements elements) throws IOException {
-		System.out.println("ActionWriter.getWriter()");
 		return new ActionWriter(element, elements);
 	}
 

@@ -27,25 +27,8 @@ import com.google.testing.compile.Compilation;
 class CommandLineAppProcessorTest {
 
 	/**
-	 * @throws java.lang.Exception
-	 */
-	@BeforeAll
-	static void setUpBeforeClass() throws Exception {
-	}
-
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@AfterAll
-	static void tearDownAfterClass() throws Exception {
-	}
-
-	/**
 	 * This is a simple test to insure that basic compilation works
 	 * for @CommandLineApp.
-	 * 
-	 * N.B. - Using the ICE classes developed for DataElements seems a bit klugy in
-	 * this case.
 	 */
 	@Test
 	void testBasicCompilation() {

@@ -16,6 +16,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import org.eclipse.ice.tasks.IActionType;
+
 /**
  * 
  * This is an annotation to create an implementation of IAction. This 
@@ -30,5 +32,7 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.SOURCE)
 public @interface Action {
+	
+	String actionType() default "IActionType.FUNCTION.JAVA";
 
 }

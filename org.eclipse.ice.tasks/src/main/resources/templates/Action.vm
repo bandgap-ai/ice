@@ -26,9 +26,23 @@ public class ${class}Action implements IAction<${type}>, Serializable {
 	@Inject
 	${class} actionImpl;
 
+	/**
+	 * Default nullary constructor.
+	 */
+	public ${class}Action() {}
+
+	/**
+	 * Copy constructor primarily used for testing. It chain-calls the nullary
+	 * constructor for completeness.
+	 */
+	public ${class}Action(${class} otherImpl) {
+		this();
+		actionImpl = otherImpl;
+	}
+
 	@Override
 	public IActionType getType() {
-		return IActionType.BASIC.DIAGNOSTIC;
+		return ${actionTypeValue};
 	}
 
 	@Override

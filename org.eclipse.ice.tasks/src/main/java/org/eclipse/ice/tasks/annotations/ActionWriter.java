@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024- Amazon.com LLC.
+ * Copyright (c) 2025- The Band Gap Corporation
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -20,12 +20,14 @@ import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.PackageElement;
+import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
 import javax.lang.model.type.TypeMirror;
 import javax.lang.model.util.Elements;
 
 import org.eclipse.ice.dev.annotations.processors.GeneratedFileWriter;
 import org.eclipse.ice.dev.annotations.processors.VelocitySourceWriter;
+import org.eclipse.ice.tasks.IActionType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -57,7 +59,7 @@ public class ActionWriter extends VelocitySourceWriter implements GeneratedFileW
 		// Read the code properties from the element
 		readElementProperties(element, elementUtils);
 	}
-
+	
 	/**
 	 * Private utility methods for reading properties from the element safely.
 	 * 
@@ -91,6 +93,22 @@ public class ActionWriter extends VelocitySourceWriter implements GeneratedFileW
 			// Get the name of the package that encloses the method.
 			PackageElement packageElement = elementUtils.getPackageOf(element);
 			context.put("package", packageElement.getQualifiedName());
+			// Get the IActionType
+			ExecutableElement methodElement = (ExecutableElement) element;
+			Action actionAnnotation = methodElement.getAnnotation(Action.class);
+			String actionTypeString = actionAnnotation.actionType();
+			
+			// Use the utility class for action type validation.
+			ActionTypeValidator validator = new ActionTypeValidator();
+			if (!validator.isValidActionType(actionTypeString, elementUtils)) {
+				logger.warn("Invalid @Action value: 'IActionType." + actionTypeString +
+									"' does not resolve to a valid enum constant.");
+				logger.warn("Defaulting to IActionType.FUNCTION.JAVA instead.");
+				actionTypeString = "IActionType.FUNCTION.JAVA";
+			}
+			context.put("actionTypeClass", IActionType.class.getCanonicalName());
+			context.put("actionTypeValue", actionTypeString);
+			
 		} else {
 			throw new IOException("@Action can only be used on public methods.");
 		}
