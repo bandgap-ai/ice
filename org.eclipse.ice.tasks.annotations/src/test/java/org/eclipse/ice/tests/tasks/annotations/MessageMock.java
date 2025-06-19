@@ -8,7 +8,7 @@
  * Contributors:
  *    Jay Jay Billings - Initial implementation
  *******************************************************************************/
-package org.eclipse.ice.tests.tasks;
+package org.eclipse.ice.tests.tasks.annotations;
 
 import org.eclipse.ice.tasks.IActionType;
 import org.eclipse.ice.tasks.annotations.Action;

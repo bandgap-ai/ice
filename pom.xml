@@ -16,7 +16,6 @@
     <module>org.eclipse.ice.commands</module>
     <module>org.eclipse.ice.renderer</module>
     <module>org.eclipse.ice.tasks</module>
-    <module>org.eclipse.ice.tasks.utils</module>
   </modules>
   <profiles>
     <profile>

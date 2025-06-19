@@ -27,23 +27,8 @@
 				<configuration>
 					<annotationProcessorPaths>
 						<path>
-							<groupId>com.google.auto.service</groupId>
-							<artifactId>auto-service</artifactId>
-							<version>1.0-rc6</version>
-						</path>
-						<path>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-							<version>1.18.30</version>
-						</path>
-						<path>
 							<groupId>org.eclipse.ice</groupId>
 							<artifactId>org.eclipse.ice.dev.annotations</artifactId>
-							<version>3.0.0-SNAPSHOT</version>
-						</path>
-						<path>
-							<groupId>org.eclipse.ice</groupId>
-							<artifactId>org.eclipse.ice.tasks</artifactId>
 							<version>3.0.0-SNAPSHOT</version>
 						</path>
 					</annotationProcessorPaths>

@@ -8,7 +8,7 @@
  * Contributors:
  *    Jay Jay Billings - Initial implementation
  *******************************************************************************/
-package org.eclipse.ice.tests.tasks;
+package org.eclipse.ice.tests.tasks.annotations;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
