@@ -9,7 +9,7 @@
  *   Alex McCaskey - Initial API and implementation and/or initial documentation
  *
  *******************************************************************************/
-package org.eclipse.ice.dev.tools.ide.menu;
+package org.eclipse.ice.tools.ide.menu;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -115,7 +115,7 @@ public class ICEExtensionContributionFactory extends ExtensionContributionFactor
 		}
 
 		// Get the Extension Points
-		IExtensionPoint extensionPoint = registry.getExtensionPoint("org.eclipse.ice.dev.tools.ide.code");
+		IExtensionPoint extensionPoint = registry.getExtensionPoint("org.eclipse.ice.tools.ide.code");
 		IExtension[] codeExtensions = extensionPoint.getExtensions();
 
 		// Loop over the rest of the Extensions and create

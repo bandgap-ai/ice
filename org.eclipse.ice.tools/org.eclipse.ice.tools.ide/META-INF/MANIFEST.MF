@@ -1,11 +1,11 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: ICE Developer Tools for the Eclipse IDE
-Bundle-SymbolicName: org.eclipse.ice.dev.tools.ide;singleton:=true
+Bundle-SymbolicName: org.eclipse.ice.tools.ide;singleton:=true
 Bundle-Version: 3.0.0.qualifier
 Bundle-Vendor: The Band Gap Corporation
-Export-Package: org.eclipse.ice.dev.tools.ide.actions,
- org.eclipse.ice.dev.tools.ide.menu
+Export-Package: org.eclipse.ice.tools.ide.actions,
+ org.eclipse.ice.tools.ide.menu
 Require-Bundle: org.eclipse.core.runtime;bundle-version="3.11.0",
  org.eclipse.jface;bundle-version="3.11.0",
  org.eclipse.core.expressions;bundle-version="3.5.0",
@@ -20,7 +20,7 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="3.11.0",
  org.eclipse.m2e.core;bundle-version="1.6.0",
  org.eclipse.ui.ide
 Bundle-RequiredExecutionEnvironment: JavaSE-21
-Automatic-Module-Name: org.eclipse.ice.dev.tools.ide.singleton.true
+Automatic-Module-Name: org.eclipse.ice.tools.ide.singleton.true
 Import-Package: org.apache.commons.io;version="2.2.0",
  org.apache.commons.lang,
  org.eclipse.egit.github.core;version="4.0.0",

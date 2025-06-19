@@ -9,7 +9,7 @@
  *   Alex McCaskey - Initial API and implementation and/or initial documentation
  *
  *******************************************************************************/
-package org.eclipse.ice.dev.tools.ide.actions;
+package org.eclipse.ice.tools.ide.actions;
 
 import java.io.File;
 import java.io.IOException;
@@ -73,7 +73,7 @@ public class ImportLocalICEHandler extends ICECloneHandler {
 					Job badJob = new Job("Import Local ICE") {
 						@Override
 						protected IStatus run(IProgressMonitor monitor) {
-							return new Status(IStatus.ERROR, "org.eclipse.ice.dev.tools.ide", 1, "ICE is already cloned and imported into the Project Explorer.", null);
+							return new Status(IStatus.ERROR, "org.eclipse.ice.tools.ide", 1, "ICE is already cloned and imported into the Project Explorer.", null);
 						}
 					};
 					// Start the job

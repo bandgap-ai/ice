@@ -9,7 +9,7 @@
  *   Alex McCaskey - Initial API and implementation and/or initial documentation
  *
  *******************************************************************************/
-package org.eclipse.ice.dev.tools.ide.actions;
+package org.eclipse.ice.tools.ide.actions;
 
 import java.util.ArrayList;
 import java.util.Arrays;

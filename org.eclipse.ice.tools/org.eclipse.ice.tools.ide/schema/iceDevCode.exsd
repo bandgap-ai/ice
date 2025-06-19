@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!-- Schema file written by PDE -->
-<schema targetNamespace="org.eclipse.ice.dev.tools.ide" xmlns="http://www.w3.org/2001/XMLSchema">
+<schema targetNamespace="org.eclipse.ice.tools.ide" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appinfo>
-         <meta.schema plugin="org.eclipse.ice.dev.tools.ide" id="org.eclipse.ice.dev.tools.ide" name="Scientific Code"/>
+         <meta.schema plugin="org.eclipse.ice.tools.ide" id="org.eclipse.ice.tools.ide" name="Scientific Code"/>
       </appinfo>
       <documentation>
-         The org.eclipse.ice.dev.tools.ide extension point lets developers easily and efficiently plug in new &quot;developer-related&quot; tasks into Eclipse. These tasks are added to Eclipse as sub-menu items for the ICE top-level application Menu. By creating an extension of this extension point, and adding a new &quot;code&quot; to that extension, you can enable default clone and fork actions in the ICE menu for your scientific code. Furthermore, you can add custom commands to the created &quot;code&quot; element that connect to AbstractHandler implementations and are added to the code&apos;s sub-menu in the Developer Menu.
+         The org.eclipse.ice.tools.ide extension point lets developers easily and efficiently plug in new &quot;developer-related&quot; tasks into Eclipse. These tasks are added to Eclipse as sub-menu items for the ICE top-level application Menu. By creating an extension of this extension point, and adding a new &quot;code&quot; to that extension, you can enable default clone and fork actions in the ICE menu for your scientific code. Furthermore, you can add custom commands to the created &quot;code&quot; element that connect to AbstractHandler implementations and are added to the code&apos;s sub-menu in the Developer Menu.
       </documentation>
    </annotation>
 
