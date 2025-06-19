@@ -16,20 +16,26 @@ import org.eclipse.ice.tasks.TaskStateData;
 import org.eclipse.ice.tasks.primitives.MoveData;
 
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.inject.Any;
+import jakarta.inject.Inject;
 
 /**
  * This is a primitive task for moving files and data.
  * 
  * @author Jay Jay Billings
  */
-@ApplicationScoped
+@Any
 public class MoveTask extends Task<MoveData> {
 
+	@Inject
 	public MoveTask(TaskStateData stateData) throws Exception {
 		super(stateData);
 		
 		stateData.setId(1);
 		stateData.setName("Move Task");
+		
+		MoveDataFactory factory = new MoveDataFactory();
+		MoveData data = factory.build();
 	}
 	
 }
