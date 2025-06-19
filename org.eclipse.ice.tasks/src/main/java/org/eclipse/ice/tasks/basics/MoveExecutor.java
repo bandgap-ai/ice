@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.eclipse.ice.tasks.primitives;
+package org.eclipse.ice.tasks.basics;
 
 import org.eclipse.ice.tasks.IActionType;
 import org.eclipse.ice.tasks.annotations.Action;

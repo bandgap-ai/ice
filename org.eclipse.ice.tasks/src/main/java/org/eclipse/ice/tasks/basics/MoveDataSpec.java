@@ -9,7 +9,7 @@
  *   Initial API and implementation and/or initial documentation - 
  *   Jay Jay Billings
  *****************************************************************************/
-package org.eclipse.ice.tasks.primitives;
+package org.eclipse.ice.tasks.basics;
 
 import java.net.URI;
 

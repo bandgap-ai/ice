@@ -9,11 +9,10 @@
  *   Initial API and implementation and/or initial documentation - 
  *   Jay Jay Billings
  *****************************************************************************/
-package org.eclipse.ice.tasks.primitives;
+package org.eclipse.ice.tasks.basics;
 
 import org.eclipse.ice.tasks.Task;
 import org.eclipse.ice.tasks.TaskStateData;
-import org.eclipse.ice.tasks.primitives.MoveData;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.Any;
