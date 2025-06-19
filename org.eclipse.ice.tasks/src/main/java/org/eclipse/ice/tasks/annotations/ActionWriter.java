@@ -77,8 +77,9 @@ public class ActionWriter extends VelocitySourceWriter implements GeneratedFileW
 			List<? extends VariableElement> parameters = method.getParameters();
 			if (parameters.size() == 1) {
 				VariableElement param = parameters.get(0);
+				context.put("dataTypePackage", elementUtils.getPackageOf(param));
 				TypeMirror paramType = param.asType();
-				context.put("type", paramType.toString());
+				context.put("dataType", paramType.toString());
 				context.put("paramName", param.getSimpleName().toString());
 			} else {
 				throw new IOException("The method must take one argument for @Action.");
@@ -108,6 +109,8 @@ public class ActionWriter extends VelocitySourceWriter implements GeneratedFileW
 			}
 			context.put("actionTypeClass", IActionType.class.getCanonicalName());
 			context.put("actionTypeValue", actionTypeString);
+			
+			System.out.println("Context = " + context);
 			
 		} else {
 			throw new IOException("@Action can only be used on public methods.");

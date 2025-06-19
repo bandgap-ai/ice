@@ -10,13 +10,18 @@ import jakarta.inject.Inject;
 import jakarta.enterprise.context.Dependent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ${type};
+## Check to see if the type system gave us a full type or short-changed us.
+#if( $dataType.contains(".") )
+import ${dataType};
+#else
+import ${dataTypePackage}.${dataType};
+#end
 
 /**
  * A generated implementation of IAction to run ${class}.${method}.
  */
 @Dependent
-public class ${class}Action implements IAction<${type}>, Serializable {
+public class ${class}Action implements IAction<${dataType}>, Serializable {
 
 	/**
 	 * Logger
@@ -46,7 +51,7 @@ public class ${class}Action implements IAction<${type}>, Serializable {
 	}
 
 	@Override
-	public boolean run(${type} data) {
+	public boolean run(${dataType} data) {
 		boolean retVal = false;
 		
 		try {

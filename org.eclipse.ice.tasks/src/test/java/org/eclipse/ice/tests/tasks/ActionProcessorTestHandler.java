@@ -43,7 +43,7 @@ public class ActionProcessorTestHandler {
 	 * @param true if successful, false otherwise.
 	 */
 	@Action(actionType="IActionType.EXECUTABLE.LOCAL")
-	public boolean setData(org.eclipse.ice.tests.tasks.TestData otherData) {
+	public boolean setData(TestData otherData) {
 		if (otherData != null) {
 			data = otherData;
 			return true;

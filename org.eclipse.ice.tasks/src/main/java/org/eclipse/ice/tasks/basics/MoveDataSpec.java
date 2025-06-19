@@ -24,13 +24,13 @@ import org.eclipse.ice.dev.annotations.DataField;
 public class MoveDataSpec {
 
 	/**
-	 * Source location
+	 * Source file location
 	 */
 	@DataField
 	private URI src;
 	
 	/**
-	 * Destination Location
+	 * Destination file Location
 	 */
 	@DataField
 	private URI dest;
