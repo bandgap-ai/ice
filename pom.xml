@@ -16,18 +16,6 @@
     <module>org.eclipse.ice.commands</module>
     <module>org.eclipse.ice.renderer</module>
     <module>org.eclipse.ice.tasks</module>
+    <module>org.eclipse.ice.tasks.annotations</module>
   </modules>
-  <profiles>
-    <profile>
-      <id>full</id>
-      <modules>
-        <module>org.eclipse.ice.tests.util</module>
-        <module>org.eclipse.ice.data</module>
-        <module>org.eclipse.ice.dev</module>
-        <module>org.eclipse.ice.archetypes</module>
-        <module>org.eclipse.ice.commands</module>
-        <module>org.eclipse.ice.bats</module>
-      </modules>
-    </profile>
-  </profiles>
 </project>
