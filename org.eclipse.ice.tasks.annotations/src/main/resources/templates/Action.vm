@@ -1,8 +1,6 @@
 package $package;
 
 import ${package}.${class};
-import org.jboss.weld.environment.se.Weld;
-import org.jboss.weld.environment.se.WeldContainer;
 import org.eclipse.ice.tasks.IAction;
 import org.eclipse.ice.tasks.IActionType;
 import java.io.Serializable;
@@ -57,7 +55,7 @@ public class ${class}Action implements IAction<${dataType}>, Serializable {
 		try {
 			retVal = actionImpl.${method}(data);
 		} catch (Exception e) {
-			String msg = "Execution of ${class}.${method} by failed.";
+			String msg = "Execution of ${class}.${method} by ${class}Action failed.";
 		    logger.error(msg, e);
 		}
 		
