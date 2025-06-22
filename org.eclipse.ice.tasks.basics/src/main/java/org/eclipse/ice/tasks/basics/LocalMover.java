@@ -36,8 +36,8 @@ public class LocalMover {
 	 * @param moveData the data describing what should be moved
 	 * @return true if the move was successful, false otherwise
 	 */
-	//@Action(actionType="IActionType.BASIC.MOVE_FILE")
-	public boolean run(MoveData moveData) {
+	@Action(actionType="IActionType.BASIC.MOVE_FILE")
+	public boolean move(MoveData moveData) {
 		
 		boolean retVal = false;
 		
