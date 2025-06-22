@@ -4,7 +4,7 @@
   <artifactId>org.eclipse.ice</artifactId>
   <version>3.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
-  <name>org.eclipse.ice</name>
+  <name>Eclipse ICE Build</name>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
@@ -17,5 +17,6 @@
     <module>org.eclipse.ice.renderer</module>
     <module>org.eclipse.ice.tasks</module>
     <module>org.eclipse.ice.tasks.annotations</module>
+    <module>org.eclipse.ice.tasks.basics</module>
   </modules>
 </project>

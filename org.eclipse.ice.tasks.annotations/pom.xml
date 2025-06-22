@@ -9,7 +9,6 @@
 	<description>This package defines the interfaces and associated
 		artifacts for annotation processing for tasks in Eclipse ICE</description>
 
-
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>17</java.version>
