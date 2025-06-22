@@ -12,6 +12,7 @@
 package org.eclipse.ice.tasks.basics;
 
 import java.io.IOException;
+import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -41,7 +42,9 @@ public class LocalMover {
 		boolean retVal = false;
 		
 		try {
-			Files.move(Paths.get(moveData.getSrc()), Paths.get(moveData.getDest()));
+			URI src = moveData.getSrcDelegate().get();
+			URI dest = moveData.getDestDelegate().get();
+			Files.move(Paths.get(src), Paths.get(dest));
 			retVal = true;
 		} catch (IOException e) {
 			// Complain

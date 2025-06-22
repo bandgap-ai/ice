@@ -13,6 +13,7 @@ package org.eclipse.ice.tasks.basics;
 
 import java.net.URI;
 
+import org.eclipse.ice.data.URIDelegate;
 import org.eclipse.ice.dev.annotations.DataElement;
 import org.eclipse.ice.dev.annotations.DataField;
 
@@ -27,12 +28,14 @@ public class MoveDataSpec {
 	 * Source file location
 	 */
 	@DataField
-	private URI src;
+	@DataField.Default(value="new URIDelegate()")
+	private URIDelegate srcDelegate;
 	
 	/**
 	 * Destination file Location
 	 */
 	@DataField
-	private URI dest;
+	@DataField.Default(value="new URIDelegate()")
+	private URIDelegate destDelegate;
 	
 }

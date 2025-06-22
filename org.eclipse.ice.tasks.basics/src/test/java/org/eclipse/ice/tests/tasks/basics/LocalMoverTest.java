@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+import org.eclipse.ice.data.URIDelegate;
 import org.eclipse.ice.tasks.basics.LocalMover;
 import org.eclipse.ice.tasks.basics.MoveData;
 import org.eclipse.ice.tasks.basics.MoveDataFactory;
@@ -57,8 +58,10 @@ class LocalMoverTest {
     @Test
     public void testRunSuccess() {
         // Configure the MoveDataElement with our temporary path URIs
-        moveData.setSrc(srcFile.toUri());
-        moveData.setDest(destFile.toUri());
+    	URIDelegate src = moveData.getSrcDelegate();
+    	URIDelegate dest = moveData.getDestDelegate();
+        src.set(srcFile.toUri());
+        dest.set(destFile.toUri());
 
         // Pre-conditions
         assertTrue(Files.exists(srcFile), "Source file should exist before move");
@@ -85,8 +88,10 @@ class LocalMoverTest {
     public void testRunSourceNotFound() {
         // Configure the MoveDataElement with a non-existent source file URI
         Path nonExistentSrc = tempDir.resolve("nonExistent.txt");
-        moveData.setSrc(nonExistentSrc.toUri());
-        moveData.setDest(destFile.toUri());
+    	URIDelegate src = moveData.getSrcDelegate();
+    	URIDelegate dest = moveData.getDestDelegate();
+    	src.set(nonExistentSrc.toUri());
+    	dest.set(destFile.toUri());
 
         // Pre-condition
         assertFalse(Files.exists(nonExistentSrc), "Source file should not exist");

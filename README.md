@@ -62,6 +62,10 @@ It is important to determine the type of executable required before attempting t
 
 There are a number of examples in the test and org.eclipse.ice.renderer packages. There is also a [gist available](https://code.ornl.gov/snippets/109).
 
+## Data Elements for Classes without Nullary Constructors
+
+FIXME if delegation works!!!
+
 # Commands Examples
 
 Examples for using the Commands tools are available [in the demo bundle](https://github.com/eclipse/ice/tree/next/org.eclipse.ice.demo/src/org/eclipse/ice/demo/commands).
