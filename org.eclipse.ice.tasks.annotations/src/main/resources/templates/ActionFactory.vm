@@ -1,0 +1,47 @@
+package $package;
+
+import org.eclipse.ice.tasks.IActionFactory;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.inject.Produces;
+## Check to see if the type system gave us a full type or short-changed us.
+#if( $dataType.contains(".") )
+import ${dataType};
+#else
+import ${dataTypePackage}.${dataType};
+#end
+
+/**
+ * This is a factory for creating ${class}Action instances.
+ *
+ * It implements IActionFactory and provides the required method, and it also
+ * provides an @Produces-annotated method for building the class that
+ * implements IActionFactory. In general, the build() operation should be
+ * preferred and the buildImplementation operation should be left alone for
+ * auto-wiring with service frameworks and testing.
+ *
+ */
+@ApplicationScoped
+public class ${class}ActionFactory implements IActionFactory<${class}Action> {
+	
+	/**
+	 * This function produces a default (i.e., nullary-constructed) instance
+	 * of ${class}Action.
+	 *  
+	 * @return the instance
+	 */
+	@Produces public ${class}Action build() throws Exception {
+		return new ${class}Action();
+	}
+
+	/**
+	 * This function returns an instance of the client class (${class})
+	 * that was annotated with @Action to produce the Action. This method is not
+	 * on the IActionFactory interface, and it is implemented here mostly as a
+	 * means to auto-wire dependencies through @Produces.
+	 *
+	 * @return an instance of the underlying implementation class
+	 */	
+	@Produces public ${class} buildImplementation() {
+		return new ${class}();
+	}
+}

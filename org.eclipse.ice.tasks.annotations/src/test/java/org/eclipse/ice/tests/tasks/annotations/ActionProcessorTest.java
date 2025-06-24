@@ -14,6 +14,7 @@ import static com.google.testing.compile.CompilationSubject.assertThat;
 import static com.google.testing.compile.Compiler.javac;
 
 import org.eclipse.ice.dev.annotations.processors.DataElementProcessor;
+import org.eclipse.ice.tasks.annotations.ActionFactoryProcessor;
 import org.eclipse.ice.tasks.annotations.ActionProcessor;
 import org.junit.jupiter.api.Test;
 
@@ -37,7 +38,7 @@ class ActionProcessorTest {
 	 */
 	@Test
 	void testBasicMockActionGeneration() {
-		Compilation compilation = javac().withProcessors(new ActionProcessor())
+		Compilation compilation = javac().withProcessors(new ActionProcessor(), new ActionFactoryProcessor())
 				.compile(JavaFileObjects.forResource("input/MessageMock.java"));
 
 		// Assert that the compilation was successful
@@ -46,6 +47,9 @@ class ActionProcessorTest {
 		// Assert that the compiler generated the expected Action source file
 		assertThat(compilation).generatedSourceFile("org.eclipse.ice.tests.tasks.annotations.MessageMockAction")
 				.hasSourceEquivalentTo(JavaFileObjects.forResource("expectedOutput/MessageMockAction.java"));
+		// Assert that the compiler generated the expected ActionFactory source file
+		assertThat(compilation).generatedSourceFile("org.eclipse.ice.tests.tasks.annotations.MessageMockActionFactory")
+				.hasSourceEquivalentTo(JavaFileObjects.forResource("expectedOutput/MessageMockActionFactory.java"));
 	}
 
 	/**
@@ -55,7 +59,7 @@ class ActionProcessorTest {
 	 */
 	@Test
 	void testWithGeneratedDataElementDependency() {
-		Compilation compilation = javac().withProcessors(new ActionProcessor(), new DataElementProcessor())
+		Compilation compilation = javac().withProcessors(new ActionProcessor(), new DataElementProcessor(), new ActionFactoryProcessor())
 				.compile(JavaFileObjects.forResource("input/ActionProcessorTestHandler.java"));
 
 		// Assert that the ActionProcessor generated the expected Action source file, which
@@ -64,5 +68,10 @@ class ActionProcessorTest {
 				.generatedSourceFile("org.eclipse.ice.tests.tasks.annotations.ActionProcessorTestHandlerAction")
 				.hasSourceEquivalentTo(JavaFileObjects
 						.forResource("expectedOutput/ActionProcessorTestHandlerAction.java"));
+		// Assert that the ActionProcessor generated the expected ActionFactory source file
+		assertThat(compilation)
+				.generatedSourceFile("org.eclipse.ice.tests.tasks.annotations.ActionProcessorTestHandlerActionFactory")
+				.hasSourceEquivalentTo(JavaFileObjects
+						.forResource("expectedOutput/ActionProcessorTestHandlerActionFactory.java"));
 	}
 }

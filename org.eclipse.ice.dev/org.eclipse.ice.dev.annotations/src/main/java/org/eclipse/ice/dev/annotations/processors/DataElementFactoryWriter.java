@@ -19,8 +19,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * This writer is used for created Data Element Factories from the Velocity 
+ * This writer is used for creating Data Element Factories from the Velocity 
  * template.
+ * 
  * @author Jay Jay Billings
  */
 public class DataElementFactoryWriter extends VelocitySourceWriter implements GeneratedFileWriter {
@@ -31,14 +32,14 @@ public class DataElementFactoryWriter extends VelocitySourceWriter implements Ge
 	private static final String PACKAGE = "package";
 
 	/**
-	 * Context key for interface.
+	 * Context key for class.
 	 */
-	private static final String INTERFACE = "interface";
+	private static final String IMPL = "class";
 	
 	/**
 	 * Logging tool
 	 */
-	private static final Logger logger = LoggerFactory.getLogger(CommandLineAppWriter.class);
+	private static final Logger logger = LoggerFactory.getLogger(DataElementFactoryWriter.class);
 	
 	/**
 	 * Fully qualified name of generated interface;
@@ -59,7 +60,7 @@ public class DataElementFactoryWriter extends VelocitySourceWriter implements Ge
 		super(IMPL_TEMPLATE);
 		this.fullyQualifiedName = data.getFullyQualifiedName() + "Factory";
 		context.put(PACKAGE, data.getPackageName());
-		context.put(INTERFACE, data.getName());
+		context.put(IMPL, data.getName());
 	}
 
 	@Override

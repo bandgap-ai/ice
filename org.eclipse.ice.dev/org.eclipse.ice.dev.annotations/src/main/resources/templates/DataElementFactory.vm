@@ -9,24 +9,24 @@ import jakarta.enterprise.inject.Produces;
 #imports
 
 /**
- * This is a factory for creating ${interface} instances.
+ * This is a factory for creating ${class} instances.
  */
 @ApplicationScoped
-public class ${interface}Factory implements IDataElementFactory<${interface}> {
+public class ${class}Factory implements IDataElementFactory<${class}> {
 	
 	/**
 	 * This function produces a default (i.e., nullary-constructed) instance
-	 * of ${interface}. 
+	 * of ${class}. 
 	 */
-	@Produces public ${interface} build() throws Exception {
-		return ${interface}Implementation.builder().build();
+	@Produces public ${class} build() throws Exception {
+		return ${class}Implementation.builder().build();
 	}
 
 	/**
 	 * This function returns the configurable builder that can be used to
-	 * create customized instances of ${interface}.
+	 * create customized instances of ${class}.
 	 */	
-	@Produces public ${interface}Implementation.${interface}ImplementationBuilder builder() {
-		return ${interface}Implementation.builder();
+	@Produces public ${class}Implementation.${class}ImplementationBuilder builder() {
+		return ${class}Implementation.builder();
 	}
 }

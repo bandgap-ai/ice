@@ -6,19 +6,19 @@
  *
  * Contributors: Jay Jay Billings - Initial Implementation
  ******************************************************************************/
-package org.eclipse.ice.data;
+package org.eclipse.ice.tasks;
 
 /**
- * This is a simple factory interface for Data Elements. Data Elements 
+ * This is a simple factory interface for constructing Actions. Actions 
  * supporting type T can be constructed in a default state by calling build().
  */
-public interface IDataElementFactory<T extends IDataElement<T>> {
+public interface IActionFactory<IAction> {
 
 	/**
 	 * Factory method for an instance of T
 	 * @return an instance of T
 	 * @throws Exception
 	 */
-	public T build() throws Exception;
+	public IAction build() throws Exception;
 	
 }
