@@ -13,7 +13,6 @@ import org.eclipse.ice.tests.tasks.annotations.TestData;
 /**
  * A generated implementation of IAction to run ActionProcessorTestHandler.${method}.
  */
-@Dependent
 public class ActionProcessorTestHandlerAction implements IAction<org.eclipse.ice.tests.tasks.annotations.TestData>, Serializable {
 
 	/**
@@ -21,20 +20,23 @@ public class ActionProcessorTestHandlerAction implements IAction<org.eclipse.ice
 	 */
 	private static final Logger logger = LoggerFactory.getLogger(ActionProcessorTestHandlerAction.class);
 
-	@Inject
+	/**
+	 * Delegate class (@link ActionProcessorTestHandler) that implements the business logic of run().
+	 */
 	ActionProcessorTestHandler actionImpl;
 
 	/**
 	 * Default nullary constructor.
 	 */
-	public ActionProcessorTestHandlerAction() {}
+	public ActionProcessorTestHandlerAction() {
+		actionImpl = new ActionProcessorTestHandler();
+	}
 
 	/**
 	 * Copy constructor primarily used for testing. It chain-calls the nullary
 	 * constructor for completeness.
 	 */
 	public ActionProcessorTestHandlerAction(ActionProcessorTestHandler otherImpl) {
-		this();
 		actionImpl = otherImpl;
 	}
 

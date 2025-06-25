@@ -13,7 +13,6 @@ import java.lang.String;
 /**
  * A generated implementation of IAction to run MessageMock.setMessage.
  */
-@Dependent
 public class MessageMockAction implements IAction<java.lang.String>, Serializable {
 
 	/**
@@ -21,20 +20,23 @@ public class MessageMockAction implements IAction<java.lang.String>, Serializabl
 	 */
 	private static final Logger logger = LoggerFactory.getLogger(MessageMockAction.class);
 
-	@Inject
+	/**
+	 * Delegate class (@link MessageMock) that implements the business logic of run().
+	 */
 	MessageMock actionImpl;
 
 	/**
 	 * Default nullary constructor.
 	 */
-	public MessageMockAction() {}
+	public MessageMockAction() {
+		actionImpl = new MessageMock();
+	}
 
 	/**
 	 * Copy constructor primarily used for testing. It chain-calls the nullary
 	 * constructor for completeness.
 	 */
 	public MessageMockAction(MessageMock otherImpl) {
-		this();
 		actionImpl = otherImpl;
 	}
 

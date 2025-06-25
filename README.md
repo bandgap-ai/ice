@@ -8,7 +8,9 @@ The Maven build is the preferred build for ICE. Eclipse will often report errors
 
 The most common "errors" are:
 1. Lombok is not installed in the Eclipse IDE.
-2. For a given bundle, the `target/generated-sources/annotation` folder is not included on the project build path.
+2. For a given bundle, the `target/generated-sources/annotations` folder is not included on the project build path as a source directory.
+3. For a given bundle, the `target/generated-test-sources/annotations` folder is not included on the project build path as a source directory.
+4. JUnit-5 is not on the classpath.
 
 ## Build Instructions
 

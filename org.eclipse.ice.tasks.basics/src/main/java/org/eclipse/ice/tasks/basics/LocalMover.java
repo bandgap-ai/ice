@@ -15,17 +15,13 @@ import java.io.IOException;
 import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-
 import org.eclipse.ice.tasks.annotations.Action;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import jakarta.enterprise.context.Dependent;
-
 /**
  * This is a basic action to move a file locally.
  */
-@Dependent
 public class LocalMover {
 	/**
 	 * Logging tool

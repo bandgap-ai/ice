@@ -18,7 +18,6 @@ import ${dataTypePackage}.${dataType};
 /**
  * A generated implementation of IAction to run ${class}.${method}.
  */
-@Dependent
 public class ${class}Action implements IAction<${dataType}>, Serializable {
 
 	/**
@@ -26,20 +25,23 @@ public class ${class}Action implements IAction<${dataType}>, Serializable {
 	 */
 	private static final Logger logger = LoggerFactory.getLogger(${class}Action.class);
 
-	@Inject
+	/**
+	 * Delegate class (@link ${class}) that implements the business logic of run().
+	 */
 	${class} actionImpl;
 
 	/**
 	 * Default nullary constructor.
 	 */
-	public ${class}Action() {}
+	public ${class}Action() {
+		actionImpl = new ${class}();
+	}
 
 	/**
 	 * Copy constructor primarily used for testing. It chain-calls the nullary
 	 * constructor for completeness.
 	 */
 	public ${class}Action(${class} otherImpl) {
-		this();
 		actionImpl = otherImpl;
 	}
 

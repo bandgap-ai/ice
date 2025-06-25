@@ -103,8 +103,6 @@ public class ActionFactoryWriter extends VelocitySourceWriter implements Generat
 			// Get the name of the package that encloses the method.
 			PackageElement packageElement = elementUtils.getPackageOf(element);
 			context.put("package", packageElement.getQualifiedName());
-			
-			System.out.println("CONTEXT=" + context);
 		} else {
 			String msg = "Can't generate Action Factory. Check @Action declaration";
 			throw new IOException(msg);
@@ -116,7 +114,6 @@ public class ActionFactoryWriter extends VelocitySourceWriter implements Generat
 		logger.debug("Apache velocity context for @Action factory: " + context);
 		String fileName = context.get("package") 
 				+ "." + context.get("class") + "ActionFactory";
-		System.out.println("FILENAME="+fileName);
 		return filer.createSourceFile(fileName).openWriter();
 	}
 
